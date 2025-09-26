@@ -3,6 +3,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Ẩn cursor mặc định trên toàn bộ trang */
+* {
+  cursor: none !important;
+}
+
+/* Riêng cho các input và button vẫn hiển thị cursor để dễ tương tác */
+input, textarea, button, select {
+  cursor: pointer !important;
+}
+
 #root {
   width: 100vw;
   height: 100vh;

@@ -1,8 +1,10 @@
 import { atom, useAtom } from "jotai";
 import { useEffect, useState } from "react";
+import AIChat from "./AIChat.jsx"
+
 
 const pictures = [
-  "1.png",
+  "1.png", // Trang đầu tiên
   "2.png",
   "3.png",
   "4.png",
@@ -20,7 +22,6 @@ const pictures = [
   "16.png",
   "17.png",
   "18.png",
-
 ];
 
 export const pageAtom = atom(0);
@@ -31,17 +32,17 @@ export const staticViewAtom = atom(false);
 // Nội dung cho từng trang - mỗi trang có thể có nhiều phần
 const pageContents = {
   0: {
-    title: "TƯ TƯỞNG HỒ CHÍ MINH VỀ ĐỘC LẬP DÂN TỘC VÀ CHỦ NGHĨA XÃ HỘI",
+    title: "VỊ NỮ",
     sections: [
       {
         content:
-          "Chào mừng bạn đến với cuốn sách về tư tưởng Hồ Chí Minh về độc lập dân tộc và chủ nghĩa xã hội.",
+          "Phụ nữ không sinh ra là phụ nữ, họ trở thành phụ nữ.” — Simone de Beauvoir.Câu nói này là kim chỉ nam, nhắc nhở rằng “nữ tính” không phải bản chất cố định, mà là kết quả của một quá trình hình thành qua giáo dục, văn hóa, xã hội và lựa chọn cá nhân.",
       },
     ],
   },
   1: {
     title:
-      "Độc lập, tự do là quyền thiêng liêng, bất khả xâm phạm của tất cả các dân tộc",
+      "Hành Trình Khẳng Định Giá Trị Bản Thân: Vị Nữ và Sự Tự Do",
     sections: [
       {
         content:
@@ -391,6 +392,7 @@ export const UI = () => {
   const [audioEnabled, setAudioEnabled] = useState(false);
   const [currentVideo, setCurrentVideo] = useState(null);
   const [videoLoading, setVideoLoading] = useState(false);
+  const [aiChatOpen, setAiChatOpen] = useState(false);
 
   // Khởi tạo audio và enable sau user interaction
   useEffect(() => {
@@ -577,6 +579,22 @@ export const UI = () => {
           ✕ Đóng
         </button>
       )}
+
+      {/* Nút AI Chat - Luôn hiển thị */}
+      <button
+        className="fixed bottom-4 right-4 z-30 bg-blue-500 text-white p-3 rounded-full hover:bg-blue-600 transition-all duration-300 shadow-lg min-h-[56px] min-w-[56px] flex items-center justify-center"
+        onClick={() => setAiChatOpen(true)}
+        title="Trợ lý AI - Hỏi về tư tưởng Hồ Chí Minh"
+      >
+        🤖
+      </button>
+
+      {/* AI Chat Component */}
+      <AIChat 
+        isOpen={aiChatOpen} 
+        onClose={() => setAiChatOpen(false)}
+        currentPage={page}
+      />
     </>
   );
 };

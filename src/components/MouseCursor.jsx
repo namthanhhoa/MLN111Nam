@@ -4,11 +4,32 @@ const MouseCursor = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [trailImages, setTrailImages] = useState([]);
   const [isVisible, setIsVisible] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
   const lastPositionRef = useRef({ x: 0, y: 0 });
   const imageCounterRef = useRef(1);
 
+  // Kiểm tra thiết bị mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+                           window.innerWidth <= 768 ||
+                           ('ontouchstart' in window);
+      setIsMobile(isMobileDevice);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
+
   // Bước 1: Di chuyển theo tọa độ chuột
   useEffect(() => {
+    // Không chạy effects trên mobile
+    if (isMobile) return;
+
     const updateMousePosition = (e) => {
       const newPosition = { x: e.clientX, y: e.clientY };
       setMousePosition(newPosition);
@@ -61,9 +82,10 @@ const MouseCursor = () => {
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mouseenter', handleMouseEnter);
     };
-  }, []);
+  }, [isMobile]);
 
-  if (!isVisible) return null;
+  // Không render gì trên mobile
+  if (isMobile || !isVisible) return null;
 
   return (
     <>
@@ -118,3 +140,4 @@ const MouseCursor = () => {
 };
 
 export default MouseCursor;
+

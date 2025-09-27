@@ -34,3 +34,4 @@ dist-ssr
 *.key
 *.pem
 config/secrets.json
+node_modules

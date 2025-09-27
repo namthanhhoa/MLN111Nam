@@ -243,7 +243,8 @@ const AIChat = ({ isOpen, onClose, currentPage }) => {
           <h3 className="text-lg font-semibold">🤖 AI Trợ lý - Tư tưởng Hồ Chí Minh</h3>
           <button
             onClick={onClose}
-            className="text-white hover:text-gray-200 text-xl font-bold"
+            className="text-white text-xl font-bold rounded"
+            style={{ background: '#6256ca' }}
           >
             ×
           </button>
@@ -255,20 +256,23 @@ const AIChat = ({ isOpen, onClose, currentPage }) => {
             <button
               onClick={handleExplainCurrentPage}
               disabled={isLoading}
-              className="px-3 py-1 bg-blue-500 text-white text-sm rounded hover:bg-blue-600 disabled:opacity-50"
+              className="px-3 py-1 text-sm rounded font-semibold disabled:opacity-50 transition-colors duration-300"
+              style={{ background: '#6256ca', color: '#fff' }}
             >
               📖 Giải thích trang {currentPage}
             </button>
             <button
               onClick={handleGenerateQuiz}
               disabled={isLoading}
-              className="px-3 py-1 bg-green-500 text-white text-sm rounded hover:bg-green-600 disabled:opacity-50"
+              className="px-3 py-1 text-sm rounded font-semibold disabled:opacity-50 transition-colors duration-300"
+              style={{ background: '#6256ca', color: '#fff' }}
             >
               🧠 Tạo Quiz
             </button>
             <button
               onClick={handleClearChat}
-              className="px-3 py-1 bg-gray-500 text-white text-sm rounded hover:bg-gray-600"
+              className="px-3 py-1 text-sm rounded font-semibold transition-colors duration-300"
+              style={{ background: '#6256ca', color: '#fff' }}
             >
               🗑️ Xóa chat
             </button>
@@ -315,7 +319,8 @@ const AIChat = ({ isOpen, onClose, currentPage }) => {
             <button
               onClick={handleSendQuestion}
               disabled={!question.trim() || isLoading}
-              className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50"
+              className="px-4 py-2 rounded-lg font-semibold disabled:opacity-50 transition-colors duration-300"
+              style={{ background: '#6256ca', color: '#fff' }}
             >
               {isLoading ? '⏳' : '📤'}
             </button>

@@ -203,31 +203,26 @@ const PageContent = ({ pageNumber, isOpen }) => {
   const hasNextSection = currentSection < sections.length - 1;
   const hasPrevSection = currentSection > 0;
 
-  // Debug
-  console.log("Debug mobile content:", {
-    content,
-    sections,
-    currentSection,
-    currentContent,
-    hasNextSection,
-    hasPrevSection,
-  });
-
   // Mobile layout: content ở dưới màn hình
   if (isMobile) {
     return (
-      <div className="fixed bottom-0 left-0 right-0 h-[50vh] bg-gradient-to-t from-black/90 to-black/50 backdrop-blur-sm z-50 flex flex-col">
+      <div className="fixed bottom-0 left-0 right-0 h-[60vh] bg-gradient-to-t from-black/95 to-black/60 backdrop-blur-md z-50 flex flex-col border-t border-purple-500/30">
+        {/* Drag handle */}
+        <div className="flex justify-center py-2">
+          <div className="w-12 h-1 bg-white/30 rounded-full"></div>
+        </div>
+
         {/* Scrollable content area */}
-        <div className="flex-1 overflow-y-auto scrollbar-hide mobile-scroll-container">
-          <div className="text-white p-4 pb-2 min-h-full">
-            <h2 className="text-2xl font-bold mb-4 break-words">
+        <div className="flex-1 overflow-y-auto scrollbar-hide">
+          <div className="text-white p-4 pb-6">
+            <h2 className="text-xl sm:text-2xl font-bold mb-3 break-words leading-tight">
               {content.title}
             </h2>
             {currentContent?.image && (
               <img
                 src={currentContent.image}
                 alt="Minh hoạ"
-                className="w-full max-h-60 object-contain rounded-lg mb-3 bg-white/5"
+                className="w-full max-h-48 object-contain rounded-lg mb-3 bg-white/5"
                 onError={(e) => {
                   e.currentTarget.onerror = null;
                   e.currentTarget.src =
@@ -235,7 +230,7 @@ const PageContent = ({ pageNumber, isOpen }) => {
                 }}
               />
             )}
-            <p className="text-base leading-relaxed break-words whitespace-pre-line">
+            <p className="text-sm sm:text-base leading-relaxed break-words whitespace-pre-line">
               {currentContent?.content ||
                 content.sections?.[0]?.content ||
                 "Không có nội dung"}
@@ -245,18 +240,10 @@ const PageContent = ({ pageNumber, isOpen }) => {
 
         {/* Fixed navigation buttons */}
         {sections.length > 1 && (
-          <div className="flex justify-between items-center p-4 pt-2 gap-2 bg-gradient-to-t from-black/80 to-transparent">
+          <div className="flex justify-between items-center p-3 gap-2 bg-gradient-to-t from-black/90 to-transparent border-t border-white/10">
             <button
-              className={`px-3 py-2 rounded-lg text-sm transition-all duration-300 ${
-                hasPrevSection
-                  ? "bg-white/20 text-white hover:bg-white/30"
-                  : "bg-gray-500/20 text-gray-400 cursor-not-allowed"
-              }`}
+              className={`px-3 py-2 rounded-lg text-xs sm:text-sm transition-all duration-300 flex-1 max-w-[120px] bg-gradient-to-r from-[#6256ca] to-[#ffffff] text-[#6256ca] font-semibold hover:from-[#6256ca] hover:to-[#e0e0ff] disabled:opacity-50`}
               onClick={() => {
-                console.log("Previous button clicked", {
-                  hasPrevSection,
-                  currentSection,
-                });
                 if (hasPrevSection) {
                   setCurrentSection(currentSection - 1);
                 }
@@ -266,21 +253,13 @@ const PageContent = ({ pageNumber, isOpen }) => {
               ← Phần trước
             </button>
 
-            <span className="text-sm text-white/70">
+            <span className="text-xs sm:text-sm text-white/70 px-2">
               {currentSection + 1}/{sections.length}
             </span>
 
             <button
-              className={`px-3 py-2 rounded-lg text-sm transition-all duration-300 ${
-                hasNextSection
-                  ? "bg-white/20 text-white hover:bg-white/30"
-                  : "bg-gray-500/20 text-gray-400 cursor-not-allowed"
-              }`}
+              className={`px-3 py-2 rounded-lg text-xs sm:text-sm transition-all duration-300 flex-1 max-w-[120px] bg-gradient-to-r from-[#6256ca] to-[#ffffff] text-[#6256ca] font-semibold hover:from-[#6256ca] hover:to-[#e0e0ff] disabled:opacity-50`}
               onClick={() => {
-                console.log("Next button clicked", {
-                  hasNextSection,
-                  currentSection,
-                });
                 if (hasNextSection) {
                   setCurrentSection(currentSection + 1);
                 }
@@ -297,16 +276,16 @@ const PageContent = ({ pageNumber, isOpen }) => {
 
   // Desktop layout: content ở bên trái
   return (
-    <div className="fixed left-0 top-0 h-full w-[30vw] min-w-[300px] max-w-[90vw] bg-gradient-to-r from-black/80 to-black/20 backdrop-blur-sm z-50 pointer-events-none flex flex-col p-8 pb-28 transform transition-transform duration-500 ease-in-out">
-      <div className="text-white max-w-lg pointer-events-auto w-full flex-1 flex flex-col">
-        <h2 className="text-4xl font-bold mb-6 text-left break-words">
+    <div className="fixed left-0 top-0 h-full w-[35vw] min-w-[350px] max-w-[500px] bg-gradient-to-r from-black/90 to-black/30 backdrop-blur-md z-50 pointer-events-none flex flex-col border-r border-purple-500/20">
+      <div className="text-white max-w-full pointer-events-auto w-full flex-1 flex flex-col p-6 lg:p-8">
+        <h2 className="text-2xl lg:text-3xl xl:text-4xl font-bold mb-4 lg:mb-6 text-left break-words leading-tight">
           {content.title}
         </h2>
         {currentContent?.image && (
           <img
             src={currentContent.image}
             alt="Minh hoạ"
-            className="w-full max-h-64 object-contain rounded-lg mb-4 bg-white/5"
+            className="w-full max-h-48 lg:max-h-64 object-contain rounded-lg mb-4 bg-white/5"
             onError={(e) => {
               e.currentTarget.onerror = null;
               e.currentTarget.src =
@@ -314,24 +293,22 @@ const PageContent = ({ pageNumber, isOpen }) => {
             }}
           />
         )}
-        <p className="text-lg leading-relaxed text-left break-words whitespace-pre-line flex-1">
-          {currentContent.content}
-        </p>
+        <div className="flex-1 overflow-y-auto scrollbar-hide">
+          <p className="text-base lg:text-lg leading-relaxed text-left break-words whitespace-pre-line">
+            {currentContent.content}
+          </p>
+        </div>
 
         {/* Nút chuyển đổi phần */}
         {sections.length > 1 && (
-          <div className="flex justify-between items-center mt-6 gap-4 relative z-60">
+          <div className="flex justify-between items-center mt-4 lg:mt-6 gap-4 relative z-60 pt-4 border-t border-white/10">
             <button
               className={`px-4 py-2 rounded-lg text-sm transition-all duration-300 pointer-events-auto cursor-pointer relative z-70 ${
                 hasPrevSection
-                  ? "bg-white/20 text-white hover:bg-white/30"
+                  ? "bg-gradient-to-r from-[#6256ca] to-[#ffffff] text-[#6256ca] hover:from-[#6256ca] hover:to-[#e0e0ff]"
                   : "bg-gray-500/20 text-gray-400 cursor-not-allowed"
               }`}
               onClick={() => {
-                console.log("Desktop Previous button clicked", {
-                  hasPrevSection,
-                  currentSection,
-                });
                 if (hasPrevSection) {
                   setCurrentSection(currentSection - 1);
                 }
@@ -348,14 +325,10 @@ const PageContent = ({ pageNumber, isOpen }) => {
             <button
               className={`px-4 py-2 rounded-lg text-sm transition-all duration-300 pointer-events-auto cursor-pointer relative z-70 ${
                 hasNextSection
-                  ? "bg-white/20 text-white hover:bg-white/30"
+                  ? "bg-gradient-to-r from-[#6256ca] to-[#ffffff] text-[#6256ca] hover:from-[#6256ca] hover:to-[#e0e0ff]"
                   : "bg-gray-500/20 text-gray-400 cursor-not-allowed"
               }`}
               onClick={() => {
-                console.log("Desktop Next button clicked", {
-                  hasNextSection,
-                  currentSection,
-                });
                 if (hasNextSection) {
                   setCurrentSection(currentSection + 1);
                 }
@@ -375,11 +348,23 @@ const StaticToggleButton = () => {
   const [staticView, setStaticView] = useAtom(staticViewAtom);
   return (
     <button
-      className="bg-white/90 text-black px-3 py-2 md:px-4 md:py-2 rounded-full hover:bg-white transition-all duration-300 text-sm md:text-base min-h-[44px] min-w-[44px] flex items-center justify-center"
+      className="bg-[#6256ca] text-white px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 rounded-full transition-all duration-300 text-xs sm:text-sm md:text-base min-h-[40px] sm:min-h-[44px] md:min-h-[48px] min-w-[40px] sm:min-w-[44px] md:min-w-[48px] flex items-center justify-center shadow-lg font-medium border border-white/20 active:scale-95"
       onClick={() => setStaticView(!staticView)}
-      title="Bật/Tắt chế độ 2D (Pause hiệu ứng)"
+      title={staticView ? "Kích hoạt chế độ tương tác 3D" : "Chuyển sang chế độ tĩnh 2D"}
     >
-      {staticView ? "Chế độ 3D" : "Di chuyển/Đứng im"}
+      <span className="flex items-center gap-1 sm:gap-2">
+        {staticView ? (
+          <>
+            <span className="text-sm sm:text-base md:text-lg">✨</span>
+            <span className="hidden sm:inline text-xs sm:text-sm md:text-base">Kích Hoạt 3D</span>
+          </>
+        ) : (
+          <>
+            <span className="text-sm sm:text-base md:text-lg">⏸️</span>
+            <span className="hidden sm:inline text-xs sm:text-sm md:text-base">Tạm Dừng</span>
+          </>
+        )}
+      </span>
     </button>
   );
 };
@@ -464,7 +449,6 @@ export const UI = () => {
           }}
           onCanPlay={() => {
             console.log("Video can play:", currentVideo);
-            // Delay để đảm bảo video load xong
             setTimeout(() => setVideoLoading(false), 300);
           }}
           onError={(e) => {
@@ -478,91 +462,154 @@ export const UI = () => {
 
       {/* Loading overlay */}
       {videoLoading && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[-1] flex items-center justify-items-center">
-          <div className="text-white text-lg">Đang tải video...</div>
-          <div className="text-red-800 text-lg">
-            Bạn có thể về lại Lăng Bác rồi qua map khác để tải video
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[-1] flex items-center justify-center">
+          <div className="text-center p-4">
+            <div className="animate-spin rounded-full h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 border-2 sm:border-3 md:border-4 border-purple-500 border-t-transparent mx-auto mb-3 md:mb-4"></div>
+            <div className="text-white text-base sm:text-lg md:text-xl font-medium">Đang tải nội dung...</div>
+            <div className="text-purple-300 text-xs sm:text-sm md:text-base mt-1 sm:mt-2">Vui lòng chờ trong giây lát</div>
           </div>
         </div>
       )}
 
       <main className="pointer-events-none select-none z-10 fixed inset-0 flex justify-between flex-col overflow-x-hidden">
-        <a className="pointer-events-auto mt-10 ml-10" href="">
-          {/* <img
-            className="w-20 max-w-full"
-            src="/images/wawasensei-white.png"
-            alt="WAWA SENSEI"
-          /> */}
-        </a>
-        {/* Switch background options - dropdown top-center */}
-        <div className="pointer-events-auto fixed top-6 left-1/2 -translate-x-1/2 z-30">
-          <select
-            className="bg-black/40 text-white px-3 py-2 rounded-lg border border-white/30 backdrop-blur-sm text-sm md:text-base"
-            value={bgKey}
-            onChange={(e) => {
-              const value = e.target.value;
-              setBgKey(value);
-              const map = {
-                1: "/textures/background.jpg",
-                2: "/textures/backgroundVD1.mp4",
-                3: "/textures/BackgroundVD2.mp4",
-              };
+        {/* Header with logo area */}
+        <div className="flex justify-between items-start p-3 sm:p-4 md:p-6 gap-2 sm:gap-3 md:gap-4">
+          <div className="pointer-events-auto flex-shrink-0">
+            <div className="bg-[#6256ca] backdrop-blur-sm rounded-lg px-2 py-1 sm:px-3 sm:py-2 md:px-4 md:py-2 border border-white/20">
+              <h1 className="text-white font-bold text-sm sm:text-base md:text-lg lg:text-xl leading-tight">VỊ NỮ</h1>
+              <p className="text-white text-xs sm:text-sm md:text-sm leading-tight">Hành trình khẳng định bản thân</p>
+            </div>
+          </div>
 
-              // Check if it's a video file
-              if (map[value].endsWith(".mp4")) {
-                // Set video background with loading state
-                console.log("Setting video:", map[value]);
-                setVideoLoading(true);
-                setCurrentVideo(map[value]);
-                document.documentElement.style.setProperty(
-                  "--app-bg-image",
-                  "none"
-                );
-              } else {
-                // Set image background
-                console.log("Setting image:", map[value]);
-                setVideoLoading(false);
-                setCurrentVideo(null);
-                document.documentElement.style.setProperty(
-                  "--app-bg-image",
-                  `url('${map[value]}')`
-                );
-              }
-            }}
-          >
-            <option value="1">Lăng Bác</option>
-            {/* <option value="2">Vịnh Hạ Long</option> */}
-            <option value="3">Sài Gòn</option>
-          </select>
-        </div>
-        <div className="pointer-events-auto fixed top-6 right-6 z-30">
-          <StaticToggleButton />
-        </div>
-        <div className="w-full overflow-x-auto pointer-events-auto flex justify-center relative z-60 bg-gradient-to-t from-black/60 to-transparent">
-          <div className="overflow-x-auto flex items-center gap-2 md:gap-4 max-w-full p-2 md:p-10">
-            {[...pages].map((_, index) => (
-              <button
-                key={index}
-                className={`border-transparent hover:border-white transition-all duration-300 px-2 py-1 md:px-4 md:py-3 rounded-full text-xs md:text-lg uppercase shrink-0 border min-h-[44px] ${
-                  index === page
-                    ? "bg-white/90 text-black"
-                    : "bg-black/30 text-white"
-                }`}
-                onClick={() => handlePageClick(index)}
+          {/* Background selector - redesigned for mobile */}
+          <div className="pointer-events-auto flex-shrink-0">
+            <div className="bg-black/40 backdrop-blur-md rounded-full border border-white/30 p-1">
+              <select
+                className="bg-transparent text-white px-2 py-1 sm:px-3 sm:py-2 md:px-4 md:py-2 rounded-full text-xs sm:text-sm md:text-base focus:outline-none cursor-pointer min-w-[80px] sm:min-w-[120px]"
+                value={bgKey}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  setBgKey(value);
+                  const map = {
+                    1: "/textures/background.jpg",
+                    2: "/textures/backgroundVD1.mp4",
+                    3: "/textures/BackgroundVD2.mp4",
+                  };
+
+                  if (map[value].endsWith(".mp4")) {
+                    console.log("Setting video:", map[value]);
+                    setVideoLoading(true);
+                    setCurrentVideo(map[value]);
+                    document.documentElement.style.setProperty(
+                      "--app-bg-image",
+                      "none"
+                    );
+                  } else {
+                    console.log("Setting image:", map[value]);
+                    setVideoLoading(false);
+                    setCurrentVideo(null);
+                    document.documentElement.style.setProperty(
+                      "--app-bg-image",
+                      `url('${map[value]}')`
+                    );
+                  }
+                }}
               >
-                {index === 0 ? "Mặt trước" : `Trang ${index}`}
-              </button>
-            ))}
-            <button
-              className={`border-transparent hover:border-white transition-all duration-300 px-2 py-1 md:px-4 md:py-3 rounded-full text-xs md:text-lg uppercase shrink-0 border min-h-[44px] ${
-                page === pages.length
-                  ? "bg-white/90 text-black"
-                  : "bg-black/30 text-white"
-              }`}
-              onClick={() => handlePageClick(pages.length)}
-            >
-              Mặt sau
-            </button>
+                <option value="1">🏛️ Lăng Bác</option>
+                <option value="3">🌃 Sài Gòn</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Static toggle button */}
+          <div className="pointer-events-auto flex-shrink-0">
+            <StaticToggleButton />
+          </div>
+        </div>
+
+        {/* Bottom navigation - improved responsive */}
+        <div className="w-full pointer-events-auto relative z-60">
+          <div className="bg-gradient-to-t from-black/90 via-purple-900/50 to-transparent backdrop-blur-md border-t border-purple-500/30">
+            {/* Navigation buttons container */}
+            <div className="overflow-x-auto scrollbar-hide">
+              <div className="flex items-center gap-1 sm:gap-2 md:gap-3 p-2 sm:p-3 md:p-4 lg:p-6 justify-start sm:justify-center min-w-max">
+                {/* Front cover button */}
+                <button
+                  className={`transition-all duration-300 px-2 py-2 sm:px-3 sm:py-3 md:px-4 md:py-3 lg:px-6 lg:py-4 rounded-lg sm:rounded-xl text-xs sm:text-sm md:text-base font-medium shrink-0 border-2 min-h-[36px] sm:min-h-[44px] md:min-h-[48px] lg:min-h-[52px] relative overflow-hidden group active:scale-95 ${
+                    0 === page
+                      ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white border-purple-400 shadow-lg"
+                      : "bg-black/30 text-white border-white/30 hover:border-purple-400 hover:bg-purple-500/20"
+                  }`}
+                  onClick={() => handlePageClick(0)}
+                >
+                  <div className="flex items-center gap-1 sm:gap-2">
+                    <span className="text-sm sm:text-base md:text-lg">📖</span>
+                    <span className="hidden xs:inline text-xs sm:text-sm md:text-base">Bìa Trước</span>
+                  </div>
+                  {0 === page && (
+                    <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-lg sm:rounded-xl"></div>
+                  )}
+                </button>
+
+                {/* Page buttons */}
+                {[...pages].slice(1).map((_, index) => {
+                  const pageNum = index + 1;
+                  return (
+                    <button
+                      key={pageNum}
+                      className={`transition-all duration-300 px-2 py-2 sm:px-3 sm:py-3 md:px-4 md:py-3 lg:px-5 lg:py-4 rounded-lg sm:rounded-xl text-xs sm:text-sm md:text-base font-medium shrink-0 border-2 min-h-[36px] sm:min-h-[44px] md:min-h-[48px] lg:min-h-[52px] relative overflow-hidden group active:scale-95 ${
+                        pageNum === page
+                          ? "bg-[#6256ca] text-white border-[#6256ca] shadow-lg"
+                          : "bg-black/30 text-white border-white/30 hover:border-[#6256ca] hover:bg-[#6256ca]/20"
+                      }`}
+                      onClick={() => handlePageClick(pageNum)}
+                    >
+                      <div className="flex items-center gap-1 sm:gap-2">
+                        <span className="text-sm sm:text-base md:text-lg">✨</span>
+                        <span className="hidden sm:inline text-xs sm:text-sm md:text-base">Chương </span>
+                        <span className="text-xs sm:text-sm md:text-base">{pageNum}</span>
+                      </div>
+                      {pageNum === page && (
+                        <div className="absolute inset-0 bg-[#6256ca]/20 rounded-lg sm:rounded-xl"></div>
+                      )}
+                    </button>
+                  );
+                })}
+
+                {/* Back cover button */}
+                <button
+                  className={`transition-all duration-300 px-2 py-2 sm:px-3 sm:py-3 md:px-4 md:py-3 lg:px-6 lg:py-4 rounded-lg sm:rounded-xl text-xs sm:text-sm md:text-base font-medium shrink-0 border-2 min-h-[36px] sm:min-h-[44px] md:min-h-[48px] lg:min-h-[52px] relative overflow-hidden group active:scale-95 ${
+                    page === pages.length
+                      ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white border-purple-400 shadow-lg"
+                      : "bg-black/30 text-white border-white/30 hover:border-purple-400 hover:bg-purple-500/20"
+                  }`}
+                  onClick={() => handlePageClick(pages.length)}
+                >
+                  <div className="flex items-center gap-1 sm:gap-2">
+                    <span className="text-sm sm:text-base md:text-lg">🌟</span>
+                    <span className="hidden xs:inline text-xs sm:text-sm md:text-base">Bìa Sau</span>
+                  </div>
+                  {page === pages.length && (
+                    <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-lg sm:rounded-xl"></div>
+                  )}
+                </button>
+              </div>
+            </div>
+
+            {/* Progress indicator */}
+            <div className="px-3 sm:px-4 md:px-6 pb-2 sm:pb-3 md:pb-4">
+              <div className="w-full bg-white/20 rounded-full h-1 sm:h-2 overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-500 ease-out"
+                  style={{ width: `${(page / pages.length) * 100}%` }}
+                ></div>
+              </div>
+              <div className="text-center mt-1 sm:mt-2">
+                <span className="text-white/70 text-xs sm:text-sm">
+                  Chương {page} / {pages.length}
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </main>
@@ -570,23 +617,29 @@ export const UI = () => {
       {/* Hiển thị nội dung trang khi sách mở */}
       <PageContent pageNumber={page} isOpen={bookOpen} />
 
-      {/* Nút đóng sách */}
+      {/* Close book button - responsive */}
       {bookOpen && (
         <button
-          className="fixed top-4 right-4 z-30 bg-white/90 text-black px-3 py-2 md:px-4 md:py-2 rounded-full hover:bg-white transition-all duration-300 text-sm md:text-base min-h-[44px] min-w-[44px] flex items-center justify-center"
+          className="fixed top-3 right-3 sm:top-4 sm:right-4 md:top-6 md:right-6 z-40 bg-[#6256ca] text-white px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 rounded-full transition-all duration-300 text-xs sm:text-sm md:text-base min-h-[36px] sm:min-h-[44px] md:min-h-[48px] min-w-[36px] sm:min-w-[44px] md:min-w-[48px] flex items-center justify-center shadow-lg font-medium border border-white/20 active:scale-95"
           onClick={() => setBookOpen(false)}
         >
-          ✕ Đóng
+          <span className="flex items-center gap-1 sm:gap-2">
+            <span className="text-sm sm:text-base md:text-lg">✕</span>
+            <span className="hidden sm:inline text-xs sm:text-sm md:text-base">Đóng Sách</span>
+          </span>
         </button>
       )}
 
-      {/* Nút AI Chat - Luôn hiển thị */}
+      {/* AI Chat button - responsive */}
       <button
-        className="fixed bottom-4 right-4 z-30 bg-blue-500 text-white p-3 rounded-full hover:bg-blue-600 transition-all duration-300 shadow-lg min-h-[56px] min-w-[56px] flex items-center justify-center"
+        className="fixed bottom-3 right-3 sm:bottom-4 sm:right-4 md:bottom-6 md:right-6 z-30 bg-gradient-to-r from-blue-500 to-purple-500 text-white p-2 sm:p-3 md:p-4 rounded-full hover:from-blue-600 hover:to-purple-600 transition-all duration-300 shadow-2xl min-h-[48px] min-w-[48px] sm:min-h-[56px] sm:min-w-[56px] md:min-h-[64px] md:min-w-[64px] flex items-center justify-center group border-2 border-white/20 active:scale-95"
         onClick={() => setAiChatOpen(true)}
-        title="Trợ lý AI - Hỏi về tư tưởng Hồ Chí Minh"
+        title="Trợ lý AI - Hỏi về tư tưởng Hồ Chí Minh và nữ quyền"
       >
-        🤖
+        <div className="flex flex-col items-center">
+          <span className="text-lg sm:text-xl md:text-2xl group-hover:scale-110 transition-transform">🤖</span>
+          <span className="text-xs sm:text-xs md:text-xs mt-0 sm:mt-1 opacity-80">AI</span>
+        </div>
       </button>
 
       {/* AI Chat Component */}

@@ -476,24 +476,24 @@ export const UI = () => {
             <div className="pointer-events-auto flex-shrink-0 bg-black/40 backdrop-blur-md rounded-full border border-white/30 p-1 flex items-center gap-1">
               <button
                 onClick={() => setQuizOpen(true)}
-                className="bg-[#6256ca] hover:bg-purple-700 transition-colors text-white px-2 py-1 sm:px-3 sm:py-2 rounded-full text-xs sm:text-sm md:text-base focus:outline-none cursor-pointer min-w-[70px] sm:min-w-[90px] flex items-center justify-center gap-1"
+                className="bg-[#6256ca] hover:bg-purple-700 transition-colors text-white px-2 py-1 sm:px-3 sm:py-2 rounded-full text-xs sm:text-sm md:text-base focus:outline-none cursor-pointer min-w-[36px] sm:min-w-[90px] flex items-center justify-center gap-1"
               >
                 <span>❓</span>
-                <span>QUIZ</span>
+                <span className="hidden sm:inline">QUIZ</span>
               </button>
               <button
                 onClick={() => setPodcastOpen(true)}
-                className="bg-[#6256ca] hover:bg-purple-700 transition-colors text-white px-2 py-1 sm:px-3 sm:py-2 rounded-full text-xs sm:text-sm md:text-base focus:outline-none cursor-pointer min-w-[70px] sm:min-w-[90px] flex items-center justify-center gap-1"
+                className="bg-[#6256ca] hover:bg-purple-700 transition-colors text-white px-2 py-1 sm:px-3 sm:py-2 rounded-full text-xs sm:text-sm md:text-base focus:outline-none cursor-pointer min-w-[36px] sm:min-w-[90px] flex items-center justify-center gap-1"
               >
                 <span>🎙️</span>
-                <span>PODCAST</span>
+                <span className="hidden sm:inline">PODCAST</span>
               </button>
               <button
                 onClick={() => setAiChatOpen(true)}
-                className="bg-[#6256ca] hover:bg-purple-700 transition-colors text-white px-2 py-1 sm:px-3 sm:py-2 rounded-full text-xs sm:text-sm md:text-base focus:outline-none cursor-pointer min-w-[70px] sm:min-w-[90px] flex items-center justify-center gap-1"
+                className="bg-[#6256ca] hover:bg-purple-700 transition-colors text-white px-2 py-1 sm:px-3 sm:py-2 rounded-full text-xs sm:text-sm md:text-base focus:outline-none cursor-pointer min-w-[36px] sm:min-w-[90px] flex items-center justify-center gap-1"
               >
                 <span>🤖</span>
-                <span>AI HELP</span>
+                <span className="hidden sm:inline">AI HELP</span>
               </button>
             </div>
 
@@ -607,7 +607,7 @@ export const UI = () => {
       {/* Close book button - responsive */}
       {bookOpen && (
         <button
-          className="fixed top-3 right-3 sm:top-4 sm:right-4 md:top-6 md:right-6 z-40 bg-[#6256ca] text-white px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 rounded-full transition-all duration-300 text-xs sm:text-sm md:text-base min-h-[36px] sm:min-h-[44px] md:min-h-[48px] min-w-[36px] sm:min-w-[44px] md:min-w-[48px] flex items-center justify-center shadow-lg font-medium border border-white/20 active:scale-95"
+          className="fixed top-3 right-3 sm:top-4 sm:right-4 md:top-6 md:right-6 z-50 bg-[#6256ca] text-white px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 rounded-full transition-all duration-300 text-xs sm:text-sm md:text-base min-h-[36px] sm:min-h-[44px] md:min-h-[48px] min-w-[36px] sm:min-w-[44px] md:min-w-[48px] flex items-center justify-center shadow-lg font-medium border border-white/20 active:scale-95"
           onClick={() => setBookOpen(false)}
         >
           <span className="flex items-center gap-1 sm:gap-2">

@@ -16,50 +16,16 @@ export const useGemini = () => {
     setResponse('');
   }, []);
 
-  // Hỏi về tư tưởng Hồ Chí Minh
-  const askAboutHCM = useCallback(async (question) => {
+  // Hỏi chuyên gia triết học nữ quyền
+  const askFeministPhilosopher = useCallback(async (question) => {
     if (!question.trim()) return;
 
     setIsLoading(true);
     resetStates();
 
     try {
-      const result = await geminiService.askAboutHCMThought(question);
+      const result = await geminiService.askFeministPhilosopher(question);
       setResponse(result);
-      return result;
-    } catch (err) {
-      setError(err.message);
-      throw err;
-    } finally {
-      setIsLoading(false);
-    }
-  }, [resetStates]);
-
-  // Giải thích nội dung trang
-  const explainPage = useCallback(async (pageNumber, content) => {
-    setIsLoading(true);
-    resetStates();
-
-    try {
-      const result = await geminiService.explainPageContent(pageNumber, content);
-      setResponse(result);
-      return result;
-    } catch (err) {
-      setError(err.message);
-      throw err;
-    } finally {
-      setIsLoading(false);
-    }
-  }, [resetStates]);
-
-  // Tạo quiz
-  const generateQuiz = useCallback(async (topic, questionCount = 5) => {
-    setIsLoading(true);
-    resetStates();
-
-    try {
-      const result = await geminiService.generateQuiz(topic, questionCount);
-      setResponse(JSON.stringify(result, null, 2));
       return result;
     } catch (err) {
       setError(err.message);
@@ -95,9 +61,7 @@ export const useGemini = () => {
     response,
     
     // Methods
-    askAboutHCM,
-    explainPage,
-    generateQuiz,
+    askFeministPhilosopher,
     generateText,
     resetStates
   };

@@ -1,6 +1,8 @@
 import { atom, useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import AIChat from "./AIChat.jsx";
+import Podcast from "./Podcast.jsx";
+import Quiz from "./Quiz.jsx";
 
 const pictures = [
   "1.png",
@@ -32,47 +34,91 @@ const pageContents = {
     ],
   },
   1: {
-    title: "Phụ nữ và hành trình khẳng định vị thế trong xã hội",
+    title: "Vị Nữ – Hành Trình Khẳng Định Giá Trị",
     sections: [
       {
         content:
-          "Phụ nữ không chỉ gắn với thiên chức gia đình, mà còn có khả năng đóng góp mạnh mẽ trong học tập, lao động và sáng tạo. Quá trình giải phóng phụ nữ nhấn mạnh việc phá bỏ những định kiến giới tồn tại qua nhiều thế kỷ, giúp họ được thừa nhận như những cá nhân tự do và bình đẳng. Khi phụ nữ được trao quyền, họ trở thành lực lượng quan trọng trong công cuộc xây dựng xã hội tiến bộ và nhân văn, đồng thời khẳng định giá trị riêng trên nhiều lĩnh vực.",
+          "“Vị nữ” không chỉ còn là biểu tượng đấu tranh để giành quyền lợi, mà ngày nay đã trở thành sự tôn vinh bản thể, hương vị và giá trị riêng của phụ nữ. Đó là sự đa dạng trong lựa chọn và cách sống: có người chọn gia đình, có người theo đuổi sự nghiệp; có người mạnh mẽ, có người dịu dàng. Mọi sự lựa chọn ấy đều đáng được công nhận và trân trọng, vì chúng góp phần khẳng định vai trò thiết yếu của phụ nữ trong tiến bộ và nhân văn.\n" +
+            "\n" +
+            "Simone de Beauvoir từng nói: “Phụ nữ không sinh ra là phụ nữ, họ trở thành phụ nữ.” Câu nói này nhắc nhở rằng “nữ tính” không phải là bản chất có sẵn, mà được hình thành qua giáo dục, văn hóa, xã hội và quyết định cá nhân. Người phụ nữ có quyền và khả năng định hình chính mình, phá bỏ những ràng buộc đã tồn tại qua nhiều thế kỷ, để sống đúng với bản ngã và giá trị riêng.\n" +
+            "\n" +
+            "Những trang viết về “vị nữ” chính là lời khẳng định: phụ nữ hôm nay không chỉ dừng lại ở việc chống bất công, mà còn mở ra không gian để hiện diện với đầy đủ nhân phẩm và tự do. Đó là hành trình khẳng định giá trị, vừa kế thừa tiếng nói đấu tranh, vừa lan tỏa cảm hứng sống đúng với bản thân, trở thành một phần tất yếu của sự tiến bộ và nhân văn trong xã hội.",
       },
     ],
   },
   2: {
-    title: "Phong trào nữ quyền và khát vọng tự do – công bằng",
+    title: "Chiếc Lồng Vô Hình của Định Kiến",
     sections: [
       {
         content:
-          "Phong trào nữ quyền xuất phát từ khát vọng được sống tự do, bình đẳng và được đối xử công bằng như nam giới. Đây là một hành trình đấu tranh bền bỉ để phụ nữ có quyền học tập, quyền lao động, quyền tham gia chính trị – xã hội và quyền tự quyết cuộc đời mình. Những thành quả đạt được không chỉ mang lại sự giải phóng cho phụ nữ, mà còn thúc đẩy sự phát triển dân chủ, nhân văn và tiến bộ cho toàn xã hội.",
+          "Xã hội từ lâu gán cho phụ nữ những khuôn mẫu như “ngoan hiền, hy sinh, giỏi nội trợ”, coi đó là chuẩn mực tất yếu.\n" +
+            "\n" +
+            "Những định kiến này lặp đi lặp lại qua giáo dục, văn hóa, lời khen – chê thường ngày, biến thành chiếc “lồng vô hình” không song sắt, không khóa nhưng lại giam giữ phụ nữ trong vai trò cố định.\n" +
+            "\n" +
+            "Điều đó giới hạn tự do, triệt tiêu tiềm năng, ước mơ, khát vọng của phụ nữ.\n" +
+            "\n" +
+            "Khi các chuẩn mực này trở thành thước đo đạo đức và phẩm hạnh, phụ nữ ít cơ hội khẳng định bản thân, còn những giá trị khác như trí tuệ, sáng tạo, lãnh đạo lại bị xem nhẹ.\n" +
+            "\n" +
+            "👉 Định kiến giống như một nhà tù vô hình, ngăn phụ nữ bước ra khỏi những vai trò được định sẵn.",
       },
     ],
   },
   3: {
-    title: "Giá trị phụ nữ trong lăng kính hiện sinh",
+    title: "Triết Lý Giải Phóng: Simone de Beauvoir & Marx – Engels",
     sections: [
       {
         content:
-          "Giá trị và bản sắc của phụ nữ không phải là thứ có sẵn ngay từ khi sinh ra, mà được hình thành qua lựa chọn, trải nghiệm và hành động của mỗi cá nhân. Quan điểm hiện sinh nhấn mạnh rằng phụ nữ là chủ thể tự do, có khả năng tự kiến tạo cuộc đời mình thay vì bị áp đặt bởi những chuẩn mực truyền thống khắt khe. Việc thừa nhận quyền tự quyết và sự sáng tạo của phụ nữ cũng đồng nghĩa với việc trao cho họ cơ hội khẳng định bản thân trong một thế giới đa dạng và luôn vận động.",
+          "Simone de Beauvoir: Khẳng định cái “Tôi”\n" +
+            "\n" +
+            "Beauvoir cho rằng con người không bị định nghĩa bởi bản chất sinh học mà bởi hành động và lựa chọn. Với phụ nữ, điều này có ý nghĩa đặc biệt: họ không nên chấp nhận bị xã hội đóng khung vào vai trò “Người Khác”, mà phải tự ý thức về sự tồn tại của mình để bước ra khỏi giới hạn.\n" +
+            "Triết lý hiện sinh của bà khẳng định nữ quyền không chỉ là đòi quyền lợi, mà là hành trình ý thức – tự lựa chọn – tự chịu trách nhiệm. Phụ nữ phải giành quyền trở thành chính mình, sống đúng với bản ngã, từ đó khẳng định bình đẳng và nhân phẩm.\n" +
+            "\n" +
+            "Marx & Engels: Giải phóng khỏi áp bức kinh tế\n" +
+            "\n" +
+            "Theo Marx và Engels, sự áp bức phụ nữ bắt nguồn từ chế độ tư hữu và vai trò phụ thuộc trong sản xuất. Gia đình trở thành “nhà máy tư nhân”, giam hãm phụ nữ trong công việc nội trợ.\n" +
+            "Engels nhấn mạnh: chỉ khi phụ nữ được tham gia lao động xã hội bình đẳng với nam giới, họ mới có thể tự do, tự quyết định cuộc sống của mình. Giải phóng kinh tế là điều kiện tiên quyết để phá bỏ định kiến, khẳng định vị thế bình đẳng trong xã hội.",
       },
     ],
   },
   4: {
-    title: "Thách thức và cơ hội của phụ nữ trong xã hội hiện đại",
+    title: "Đối Thoại Giữa Truyền Thống và Hiện Đại",
     sections: [
       {
         content:
-          "Trong bối cảnh hiện đại, phụ nữ có nhiều cơ hội mới để học tập, làm việc và phát triển bản thân, nhưng đồng thời cũng phải đối mặt với những áp lực và định kiến giới vẫn còn tồn tại. Sự căng thẳng giữa truyền thống và hiện đại khiến hành trình khẳng định giá trị của họ vừa mở ra triển vọng, vừa đặt ra thách thức. Do đó, việc tiếp tục bảo vệ quyền bình đẳng, xoá bỏ rào cản xã hội và tạo điều kiện cho phụ nữ phát triển toàn diện là yêu cầu cấp thiết để xây dựng một xã hội công bằng và nhân văn.",
+          "Đối thoại giữa các luồng tư tưởng\n" +
+            "\n" +
+            "Simone de Beauvoir khẳng định phụ nữ không nên chấp nhận vai trò bị xã hội áp đặt, mà phải tự ý thức về sự tồn tại của mình. Việc “trở thành phụ nữ” không phải là thuận theo những khuôn mẫu dựng sẵn (làm vợ, làm mẹ, làm “người phụ nữ ngoan hiền”), mà là hành trình phản kháng, vượt thoát và khẳng định bản ngã tự do. Nữ quyền, theo Beauvoir, là sự lựa chọn và tự chịu trách nhiệm của chính phụ nữ.\n" +
+            "\n" +
+            "Gen Z và cuộc đối thoại mới\n" +
+            "\n" +
+            "Trong xã hội hiện đại, Gen Z đang đặt lại nhiều câu hỏi về bình đẳng giới trong đời sống hằng ngày. Họ không nhìn việc “ai trả tiền khi hẹn hò” hay “nội trợ là trách nhiệm của phụ nữ” như chuẩn mực, mà coi đó là sự chia sẻ, linh hoạt và đồng thuận. Gen Z hướng đến sự tôn trọng khác biệt, đối thoại chân thành thay vì cực đoan, qua đó khẳng định lao động nội trợ cũng có giá trị và cần được công nhận bình đẳng trong gia đình.",
       },
     ],
   },
   5: {
-    title: "Giải phóng phụ nữ và tiến bộ chung của nhân loại",
+    title: "“Vị Nữ” Hôm Nay – Tích Cực và Độc Hại",
     sections: [
       {
         content:
-          "Sự giải phóng phụ nữ luôn gắn liền với sự tiến bộ chung của dân tộc và nhân loại. Khi phụ nữ được trao quyền bình đẳng, xã hội được hưởng lợi từ trí tuệ, sức sáng tạo và tinh thần nhân văn mà họ mang lại. Giải phóng phụ nữ không chỉ là hành trình khẳng định giá trị cá nhân, mà còn là cách thức để kiến tạo một cộng đồng phát triển bền vững, nơi tự do và bình đẳng trở thành nền tảng chung cho tất cả mọi người.",
+          "Nữ quyền tích cực\n" +
+            "\n" +
+            "Bình đẳng cơ hội: Mọi giới tính đều có quyền tiếp cận giáo dục, nghề nghiệp và cơ hội thăng tiến.\n" +
+            "\n" +
+            "Quyền tự quyết: Phụ nữ được lựa chọn con đường sống, sự nghiệp, hôn nhân theo ý chí riêng.\n" +
+            "\n" +
+            "Tôn trọng sự khác biệt: Không áp đặt chuẩn mực chung, thừa nhận đa dạng lựa chọn và trải nghiệm.\n" +
+            "\n" +
+            "Tinh thần hợp tác: Không phủ định nam giới, mà khuyến khích sự đồng hành và hỗ trợ lẫn nhau.\n" +
+            "\n" +
+            "Nữ quyền độc hại\n" +
+            "\n" +
+            "Biến bình đẳng thành đặc quyền: Chỉ đòi lợi ích riêng cho phụ nữ, bỏ qua công bằng toàn thể.\n" +
+            "\n" +
+            "Phủ nhận giới khác: Nhìn nam giới như “kẻ đối lập”, tạo mâu thuẫn thay vì hợp tác.\n" +
+            "\n" +
+            "Cực đoan hóa thông điệp: Áp đặt, công kích, sử dụng ngôn ngữ hằn học, gây chia rẽ xã hội.\n" +
+            "\n" +
+            "Mất tính đối thoại: Không còn tinh thần trao đổi, đối thoại để hiểu nhau, mà tạo khoảng cách.",
       },
     ],
   },
@@ -310,6 +356,8 @@ export const UI = () => {
   const [currentVideo, setCurrentVideo] = useState(null);
   const [videoLoading, setVideoLoading] = useState(false);
   const [aiChatOpen, setAiChatOpen] = useState(false);
+  const [quizOpen, setQuizOpen] = useState(false);
+  const [podcastOpen, setPodcastOpen] = useState(false);
 
   // Khởi tạo audio và enable sau user interaction
   useEffect(() => {
@@ -364,6 +412,8 @@ export const UI = () => {
 
   return (
     <>
+      {quizOpen && <Quiz onClose={() => setQuizOpen(false)} />}
+      {podcastOpen && <Podcast onClose={() => setPodcastOpen(false)} />}
       {/* Video background */}
       {currentVideo && (
         <video
@@ -421,49 +471,36 @@ export const UI = () => {
             </div>
           </div>
 
-          {/* Background selector - redesigned for mobile */}
-          <div className="pointer-events-auto flex-shrink-0">
-            <div className="bg-black/40 backdrop-blur-md rounded-full border border-white/30 p-1">
-              <select
-                className="bg-transparent text-white px-2 py-1 sm:px-3 sm:py-2 md:px-4 md:py-2 rounded-full text-xs sm:text-sm md:text-base focus:outline-none cursor-pointer min-w-[80px] sm:min-w-[120px]"
-                value={bgKey}
-                onChange={(e) => {
-                  const value = e.target.value;
-                  setBgKey(value);
-                  const map = {
-                    1: "/textures/background.jpg",
-                    2: "/textures/backgroundVD1.mp4",
-                    3: "/textures/BackgroundVD2.mp4",
-                  };
-
-                  if (map[value].endsWith(".mp4")) {
-                    console.log("Setting video:", map[value]);
-                    setVideoLoading(true);
-                    setCurrentVideo(map[value]);
-                    document.documentElement.style.setProperty(
-                      "--app-bg-image",
-                      "none"
-                    );
-                  } else {
-                    console.log("Setting image:", map[value]);
-                    setVideoLoading(false);
-                    setCurrentVideo(null);
-                    document.documentElement.style.setProperty(
-                      "--app-bg-image",
-                      `url('${map[value]}')`
-                    );
-                  }
-                }}
+          <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
+            {/* QUIZ, Podcast, AI buttons */}
+            <div className="pointer-events-auto flex-shrink-0 bg-black/40 backdrop-blur-md rounded-full border border-white/30 p-1 flex items-center gap-1">
+              <button
+                onClick={() => setQuizOpen(true)}
+                className="bg-[#6256ca] hover:bg-purple-700 transition-colors text-white px-2 py-1 sm:px-3 sm:py-2 rounded-full text-xs sm:text-sm md:text-base focus:outline-none cursor-pointer min-w-[70px] sm:min-w-[90px] flex items-center justify-center gap-1"
               >
-                <option value="1">🏛️ Lăng Bác</option>
-                <option value="3">🌃 Sài Gòn</option>
-              </select>
+                <span>❓</span>
+                <span>QUIZ</span>
+              </button>
+              <button
+                onClick={() => setPodcastOpen(true)}
+                className="bg-[#6256ca] hover:bg-purple-700 transition-colors text-white px-2 py-1 sm:px-3 sm:py-2 rounded-full text-xs sm:text-sm md:text-base focus:outline-none cursor-pointer min-w-[70px] sm:min-w-[90px] flex items-center justify-center gap-1"
+              >
+                <span>🎙️</span>
+                <span>PODCAST</span>
+              </button>
+              <button
+                onClick={() => setAiChatOpen(true)}
+                className="bg-[#6256ca] hover:bg-purple-700 transition-colors text-white px-2 py-1 sm:px-3 sm:py-2 rounded-full text-xs sm:text-sm md:text-base focus:outline-none cursor-pointer min-w-[70px] sm:min-w-[90px] flex items-center justify-center gap-1"
+              >
+                <span>🤖</span>
+                <span>AI HELP</span>
+              </button>
             </div>
-          </div>
 
-          {/* Static toggle button */}
-          <div className="pointer-events-auto flex-shrink-0">
-            <StaticToggleButton />
+            {/* Static toggle button */}
+            <div className="pointer-events-auto flex-shrink-0">
+              <StaticToggleButton />
+            </div>
           </div>
         </div>
 
@@ -581,22 +618,6 @@ export const UI = () => {
           </span>
         </button>
       )}
-
-      {/* AI Chat button - responsive */}
-      <button
-        className="fixed bottom-3 right-3 sm:bottom-4 sm:right-4 md:bottom-6 md:right-6 z-30 bg-gradient-to-r from-blue-500 to-purple-500 text-white p-2 sm:p-3 md:p-4 rounded-full hover:from-blue-600 hover:to-purple-600 transition-all duration-300 shadow-2xl min-h-[48px] min-w-[48px] sm:min-h-[56px] sm:min-w-[56px] md:min-h-[64px] md:min-w-[64px] flex items-center justify-center group border-2 border-white/20 active:scale-95"
-        onClick={() => setAiChatOpen(true)}
-        title="Trợ lý AI - Hỏi về tư tưởng Hồ Chí Minh và nữ quyền"
-      >
-        <div className="flex flex-col items-center">
-          <span className="text-lg sm:text-xl md:text-2xl group-hover:scale-110 transition-transform">
-            🤖
-          </span>
-          <span className="text-xs sm:text-xs md:text-xs mt-0 sm:mt-1 opacity-80">
-            AI
-          </span>
-        </div>
-      </button>
 
       {/* AI Chat Component */}
       <AIChat

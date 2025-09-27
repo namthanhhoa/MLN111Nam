@@ -1,10 +1,9 @@
 import { atom, useAtom } from "jotai";
 import { useEffect, useState } from "react";
-import AIChat from "./AIChat.jsx"
-
+import AIChat from "./AIChat.jsx";
 
 const pictures = [
-  "1.png", // Trang đầu tiên
+  "1.png",
   "2.png",
   "3.png",
   "4.png",
@@ -14,14 +13,6 @@ const pictures = [
   "8.png",
   "9.png",
   "10.png",
-  "11.png",
-  "12.png",
-  "13.png",
-  "14.png",
-  "15.png",
-  "16.png",
-  "17.png",
-  "18.png",
 ];
 
 export const pageAtom = atom(0);
@@ -32,123 +23,56 @@ export const staticViewAtom = atom(false);
 // Nội dung cho từng trang - mỗi trang có thể có nhiều phần
 const pageContents = {
   0: {
-    title: "VỊ NỮ",
+    title: "VỊ NỮ & Hành Trình Khẳng Định Giá Trị Bản Thân",
     sections: [
       {
         content:
-          "Phụ nữ không sinh ra là phụ nữ, họ trở thành phụ nữ.” — Simone de Beauvoir.Câu nói này là kim chỉ nam, nhắc nhở rằng “nữ tính” không phải bản chất cố định, mà là kết quả của một quá trình hình thành qua giáo dục, văn hóa, xã hội và lựa chọn cá nhân.",
+          "“Phụ nữ không sinh ra là phụ nữ, họ trở thành phụ nữ.” — Simone de Beauvoir. Câu nói này nhắc nhở rằng nữ tính không phải bản chất cố định, mà là kết quả của quá trình giáo dục, văn hóa, xã hội và lựa chọn cá nhân. Gắn với đó là khát vọng độc lập, tự do – quyền thiêng liêng của dân tộc Việt Nam. Từ Bản Yêu sách năm 1919, Chánh cương vắn tắt (1930), đến Tuyên ngôn độc lập 1945 và Lời kêu gọi Toàn quốc kháng chiến 1946, Hồ Chí Minh khẳng định: “Không có gì quý hơn độc lập, tự do”, đặt nền tảng cho hành trình khẳng định giá trị con người và dân tộc.",
       },
     ],
   },
   1: {
-    title:
-      "Hành Trình Khẳng Định Giá Trị Bản Thân: Vị Nữ và Sự Tự Do",
+    title: "Phụ nữ và hành trình khẳng định vị thế trong xã hội",
     sections: [
       {
         content:
-          "Độc lập, tự do là quyền thiêng liêng, bất khả xâm phạm của mọi dân tộc. Từ ngàn xưa, lịch sử Việt Nam gắn liền với truyền thống yêu nước và đấu tranh chống giặc ngoại xâm, thể hiện khát vọng có được nền độc lập và tự do cho nhân dân – một giá trị thiêng liêng mà Hồ Chí Minh luôn hiện thân.\n\n Năm 1919, nhân dịp các nước Đồng minh thắng trận trong Chiến tranh thế giới thứ nhất họp Hội nghị Vécxây (Pháp), thay mặt những người Việt Nam yêu nước, Hồ Chí Minh gửi Bản Yêu sách của nhân dân An Nam tới Hội nghị Vécxây, bao gồm 8 điểm với hai nội dung chính là đời quyền bình đẳng về mặt pháp lý và đòi các quyển tự do, dân chủ của người dân Đông Dương, Bản yêu sách không được Hội nghị chấp nhận nhưng qua sự kiện trên cho thấy lần đầu tiên, tư tưởng Hồ Chí Minh về quyền của các dân tộc thuộc địa mà trước hết là quyền bình đẳng và tự do đã hình thành, thể hiện tư tưởng về quyền dân tộc và quyền con người hình thành từ sớm. ",
-      },
-
-      {
-        content:
-          "Trong Chánh cương vắn tắt của Đảng (1930), Người xác định mục tiêu chính trị là đánh đổ đế quốc chủ nghĩa Pháp và bọn phong kiến và Làm cho nước Nam hoàn toàn độc lập.\n\n Trong Tuyên ngôn độc lập 1945, Hồ Chí Minh trịnh trọng tuyên bố Việt Nam có quyền hưởng tự do và độc lập, đồng thời kêu gọi toàn dân quyết tâm bảo vệ nền độc lập đó. Tư tưởng này được cụ thể hóa qua các cuộc kháng chiến chống thực dân Pháp và đế quốc Mỹ, người đã nói với đồng bào và các quốc gia trên thế giới : “Nước Việt Nam có quyền hưởng tự do và độc lập, và sự thực đã thành một nước tự do và độc lập. Toàn thể dân Việt Nam quyết đem tất cả tinh thần và lực lượng, tính mệnh và của cải để giữ vững quyền tự do và độc lập ấy”. ",
-      },
-      {
-        content:
-          "Trong Lời kêu gọi toàn quốc kháng chiến  19/12/1946 với những lời hiệu triệu nổi tiếng như “Không! Chúng ta thà hy sinh tất cả, chứ nhất định không chịu mất nước, nhất định không chịu làm nô lệ” và “Không có gì quý hơn độc lập, tự do”, trở thành tuyên ngôn bất hủ, khích lệ nhân dân Việt Nam anh dũng chiến đấu, bảo vệ chủ quyền, toàn vẹn lãnh thổ và quyền dân tộc cơ bản.",
+          "Phụ nữ không chỉ gắn với thiên chức gia đình, mà còn có khả năng đóng góp mạnh mẽ trong học tập, lao động và sáng tạo. Quá trình giải phóng phụ nữ nhấn mạnh việc phá bỏ những định kiến giới tồn tại qua nhiều thế kỷ, giúp họ được thừa nhận như những cá nhân tự do và bình đẳng. Khi phụ nữ được trao quyền, họ trở thành lực lượng quan trọng trong công cuộc xây dựng xã hội tiến bộ và nhân văn, đồng thời khẳng định giá trị riêng trên nhiều lĩnh vực.",
       },
     ],
   },
   2: {
-    title: "Độc lập dân tộc phải gắn liền với tự do, hạnh phúc của nhân dân",
+    title: "Phong trào nữ quyền và khát vọng tự do – công bằng",
     sections: [
       {
         content:
-          " Theo Hồ Chí Minh, độc lập dân tộc phải gắn liền với tự do và hạnh phúc của nhân dân. Người đánh giá cao học thuyết Tam dân của Tôn Trung Sơn về “dân tộc độc lập, dân quyền tự do và dân sinh hạnh phúc” và khẳng định: dân tộc Việt Nam đương nhiên phải được tự do và bình đẳng về quyền lợi, đó là lẽ phải không ai chối cãi được. Trong Chánh cương vắn tắt của Đảng (1930), Hồ Chí Minh xác định mục tiêu cách mạng là làm cho nước Nam hoàn toàn độc lập, tiêu diệt mọi thứ áp bức, chia ruộng đất cho dân nghèo, bỏ sưu thuế, và bảo đảm quyền lợi lao động. ",
-      },
-      {
-        content:
-          " Sau thắng lợi Cách mạng Tháng Tám 1945, Người nhấn mạnh: “Nước độc lập mà dân không hưởng hạnh phúc tự do, thì độc lập cũng chẳng có nghĩa lý gì” và yêu cầu thực hiện ngay các quyền cơ bản cho dân: có ăn, có mặc, có chỗ ở và được học hành. Suốt đời hoạt động cách mạng, Hồ Chí Minh luôn coi độc lập gắn liền với tự do và hạnh phúc cho nhân dân, bộc bạch tâm huyết: “Tôi chỉ có một sự ham muốn tột bậc là làm sao cho nước ta được hoàn toàn độc lập, dân ta được hoàn toàn tự do, đồng bào ai cũng có cơm ăn áo mặc, ai cũng được học hành.”",
+          "Phong trào nữ quyền xuất phát từ khát vọng được sống tự do, bình đẳng và được đối xử công bằng như nam giới. Đây là một hành trình đấu tranh bền bỉ để phụ nữ có quyền học tập, quyền lao động, quyền tham gia chính trị – xã hội và quyền tự quyết cuộc đời mình. Những thành quả đạt được không chỉ mang lại sự giải phóng cho phụ nữ, mà còn thúc đẩy sự phát triển dân chủ, nhân văn và tiến bộ cho toàn xã hội.",
       },
     ],
   },
   3: {
-    title: "Độc lập dân tộc phải là nền độc lập thật sự, hoàn toàn và triệt để",
+    title: "Giá trị phụ nữ trong lăng kính hiện sinh",
     sections: [
       {
         content:
-          "Theo Hồ Chí Minh, độc lập dân tộc phải là nền độc lập thật sự, hoàn toàn và triệt để, không thể chỉ là độc lập giả hiệu do thực dân, đế quốc tạo ra thông qua các chính phủ bù nhìn nhằm che đậy bản chất xâm lược và bóc lột. Người nhấn mạnh rằng nền độc lập mà nhân dân không có quyền tự quyết về ngoại giao, không có quân đội riêng, không có tài chính riêng… thì độc lập đó chẳng có ý nghĩa gì. Trên tinh thần này, ngay sau Cách mạng Tháng Tám, trong bối cảnh đất nước gặp nhiều khó khăn và thù trong giặc ngoài, Hồ Chí Minh cùng Chính phủ Việt Nam Dân chủ Cộng hòa đã sử dụng nhiều biện pháp, đặc biệt là ngoại giao, để bảo đảm nền độc lập thật sự của đất nước.",
+          "Giá trị và bản sắc của phụ nữ không phải là thứ có sẵn ngay từ khi sinh ra, mà được hình thành qua lựa chọn, trải nghiệm và hành động của mỗi cá nhân. Quan điểm hiện sinh nhấn mạnh rằng phụ nữ là chủ thể tự do, có khả năng tự kiến tạo cuộc đời mình thay vì bị áp đặt bởi những chuẩn mực truyền thống khắt khe. Việc thừa nhận quyền tự quyết và sự sáng tạo của phụ nữ cũng đồng nghĩa với việc trao cho họ cơ hội khẳng định bản thân trong một thế giới đa dạng và luôn vận động.",
       },
     ],
   },
   4: {
-    title: "Độc lập dân tộc gắn liền với thống nhất và toàn vẹn lãnh thổ",
+    title: "Thách thức và cơ hội của phụ nữ trong xã hội hiện đại",
     sections: [
       {
         content:
-          "Trong lịch sử, dân tộc Việt Nam luôn đối mặt với âm mưu xâm lược và chia cắt đất nước. Thực dân Pháp từng chia nước ta thành ba kỳ với chế độ cai trị riêng, sau Cách mạng Tháng Tám, miền Bắc bị quân Tưởng Giới Thạch chiếm đóng, miền Nam bị Pháp xâm lược, và Pháp còn đưa ra “Nam Kỳ tự trị” nhằm chia cắt đất nước. Trước thực trạng này, Hồ Chí Minh khẳng định: “Đồng bào Nam Bộ là dân nước Việt Nam. Sông có thể cạn, núi có thể mòn, song chân lý đó không bao giờ thay đổi”. \n\n   Sau Hiệp định Giơnevơ (1954), khi đất nước tạm thời chia cắt hai miền, Người vẫn kiên trì đấu tranh cho thống nhất, nhấn mạnh: “Nước Việt Nam là một, dân tộc Việt Nam là một”. Trong Di chúc, Hồ Chí Minh bày tỏ niềm tin tuyệt đối vào thắng lợi cách mạng, vào sự thống nhất Tổ quốc và sự sum họp của đồng bào Nam – Bắc. Có thể khẳng định rằng, tư tưởng độc lập dân tộc luôn gắn liền với thống nhất và toàn vẹn lãnh thổ là tư tưởng xuyên suốt trong cuộc đời hoạt động cách mạng của Hồ Chí Minh.",
+          "Trong bối cảnh hiện đại, phụ nữ có nhiều cơ hội mới để học tập, làm việc và phát triển bản thân, nhưng đồng thời cũng phải đối mặt với những áp lực và định kiến giới vẫn còn tồn tại. Sự căng thẳng giữa truyền thống và hiện đại khiến hành trình khẳng định giá trị của họ vừa mở ra triển vọng, vừa đặt ra thách thức. Do đó, việc tiếp tục bảo vệ quyền bình đẳng, xoá bỏ rào cản xã hội và tạo điều kiện cho phụ nữ phát triển toàn diện là yêu cầu cấp thiết để xây dựng một xã hội công bằng và nhân văn.",
       },
     ],
   },
   5: {
-    title:
-      "Cách mạng giải phóng dân tộc muốn thắng lợi phải đi theo con đường cách mạng vô sản",
+    title: "Giải phóng phụ nữ và tiến bộ chung của nhân loại",
     sections: [
       {
         content:
-          "Khi thực dân Pháp xâm lược, Việt Nam đứng trước vấn đề sống còn là phải đấu tranh giải phóng dân tộc. Các phong trào yêu nước trước đó thất bại do khủng hoảng giai cấp lãnh đạo và đường lối cách mạng. Hồ Chí Minh đi tìm con đường cứu nước ở phương Tây nhưng nhận thấy cách mạng tư sản không giải phóng được dân chúng và thuộc địa, vì vậy Người quyết định lựa chọn con đường cách mạng vô sản sau khi nghiên cứu Cách mạng Tháng Mười Nga 1917 và luận cương của Lênin (1920).",
-      },
-      {
-        content:
-          "Theo Hồ Chí Minh, ở các nước thuộc địa như Việt Nam, giải phóng dân tộc phải đi trước, gắn với giải phóng xã hội, giai cấp và con người, khác với con đường ở châu Âu. Sau này Người khẳng định: Muốn cứu nước và giải phóng dân tộc không có con đường nào khác con đường cách mạng vô sản. Đây là con đường cách mạng triệt để nhất phù hợp với yêu cầu của cách mạng Việt Nam và xu thế phát triển của thời đại.  Trong Chánh cương vắn tắt của Đảng (1930), Người xác định chiến lược là làm tư sản dân quyền cách mạng và thổ địa cách mạng để tiến tới xã hội chủ nghĩa, nhưng đặt giải phóng dân tộc, đánh đổ đế quốc lên hàng đầu, còn chống phong kiến sẽ thực hiện từng bước. Đây là điểm sáng tạo của Hồ Chí Minh, kết hợp nhiệm vụ giải phóng dân tộc với con đường cách mạng vô sản phù hợp với điều kiện Việt Nam và xu thế thời đại.",
-      },
-    ],
-  },
-  6: {
-    title:
-      "Cách mạng giải phóng dân tộc, trong điều kiện Việt Nam, muốn thắng lợi phải do Đảng Cộng sản lãnh đạo",
-    sections: [
-      {
-        content:
-          "Theo Hồ Chí Minh, Đảng Cộng sản là nhân tố chủ quan quyết định thành công của cách mạng giải phóng dân tộc. Chủ nghĩa Mác – Lênin chỉ rõ, giai cấp công nhân phải có chính đảng để giác ngộ, tập hợp, huấn luyện quần chúng và đưa họ vào đấu tranh. Hồ Chí Minh tiếp thu lý luận này và nhấn mạnh vai trò của đảng trong tác phẩm Đường cách mệnh (1927): cách mạng trước hết phải có đảng cách mạng, để trong thì vận động và tổ chức dân chúng, ngoài thì liên lạc với các dân tộc bị áp bức và giai cấp vô sản toàn thế giới; đảng vững thì cách mạng mới thành công.\n\n",
-      },
-      {
-        content:
-          "Trong bối cảnh Việt Nam là nước thuộc địa – phong kiến, Người cho rằng Đảng Cộng sản vừa là đội tiên phong của giai cấp công nhân, vừa là đội tiên phong của nhân dân lao động, trong sạch, tận tâm phục vụ Tổ quốc, trở thành Đảng của cả dân tộc Việt Nam. Hồ Chí Minh khẳng định: “Chính vì Đảng Lao động Việt Nam là Đảng của giai cấp công nhân và nhân dân lao động, cho nên nó phải là Đảng của dân tộc Việt Nam”, là một luận điểm quan trọng, bổ sung và phát triển lý luận Mác-xít về vai trò của đảng.",
-      },
-    ],
-  },
-  7: {
-    title:
-      "Cách mạng giải phóng dân tộc phải dựa trên lực lượng đại đoàn kết toàn dân tộc, lấy liên minh công – nông làm nền tảng",
-    sections: [
-      {
-        content:
-          "Hồ Chí Minh quan niệm rằng cách mạng là sự nghiệp chung của toàn dân, dựa vào đại đoàn kết dân tộc, vì “có dân là có tất cả, được lòng dân thì được tất cả, mất lòng dân thì mất tất cả”. Người kế thừa tư tưởng Mác – Lênin, nhấn mạnh rằng quần chúng nhân dân là chủ thể sáng tạo ra lịch sử; cách mạng không phải việc của một vài người mà là của toàn dân. Theo Hồ Chí Minh, công nông là gốc cách mạng, liên minh công – nông là nền tảng, đồng thời Đảng phải tập hợp dân cày nghèo, tiểu tư sản, trí thức, trung nông, lợi dụng hoặc trung lập hóa các giai cấp khác chưa rõ mặt phần cách mạng. Khi thực dân Pháp xâm lược lần hai, Người kêu gọi mọi người Việt Nam, không phân biệt giai tầng, tôn giáo, dân tộc hay đẳng phái, đoàn kết chống kẻ thù chung. Hồ Chí Minh nhấn mạnh, công nhân và nông dân là hai giai cấp đông đảo, bị bóc lột nặng nề, nên “lòng cách mạng càng bền, chí cách mạng càng quyết; nếu họ thắng sẽ được cả thế giới, nếu thua chỉ mất một kiếp khổ”.",
-      },
-    ],
-  },
-  8: {
-    title:
-      "Cách mạng giải phóng dân tộc cần chủ động, sáng tạo, có khả năng giành thắng lợi trước cách mạng vô sản ở chính quốc",
-    sections: [
-      {
-        content:
-          "Hồ Chí Minh chỉ ra rằng cách mạng thuộc địa không phụ thuộc vào cách mạng vô sản ở chính quốc mà có thể giành thắng lợi trước, trái ngược với quan điểm từng được Quốc tế Cộng sản xem nhẹ vai trò cách mạng thuộc địa. Người nhấn mạnh mối quan hệ bình đẳng, tác động qua lại giữa cách mạng thuộc địa và cách mạng vô sản ở chính quốc; mỗi bên có vai trò riêng nhưng không lệ thuộc lẫn nhau.\n\n",
-      },
-      {
-        content:
-          "Hồ Chí Minh lập luận rằng thuộc địa có vị trí chiến lược đặc biệt đối với chủ nghĩa đế quốc, là nơi tập trung “nọc độc và sức sống” của chủ nghĩa tư bản, và nhấn mạnh tinh thần đấu tranh cách mạng quyết liệt của các dân tộc thuộc địa, khi được tập hợp và giác ngộ sẽ hình thành một lực lượng khổng lồ, giúp tiêu diệt chủ nghĩa đế quốc, đồng thời hỗ trợ cách mạng vô sản ở chính quốc. Người viết trong Tuyên ngôn của Hội Liên hiệp thuộc địa rằng công cuộc giải phóng phải do chính dân tộc thuộc địa nỗ lực thực hiện. Thực tiễn thắng lợi cách mạng Việt Nam năm 1945 và phong trào giải phóng dân tộc thế giới những năm 1960 chứng minh luận điểm này của Hồ Chí Minh vừa sáng tạo, vừa có giá trị lý luận và thực tiễn to lớn.",
-      },
-    ],
-  },
-  9: {
-    title:
-      "Cách mạng giải phóng dân tộc phải được tiến hành bằng phương pháp bạo lực cách mạng",
-    sections: [
-      {
-        content:
-          'Hồ Chí Minh vận dụng sáng tạo quan điểm của các nhà kinh điển Mác – Ăngghen và Lênin về bạo lực cách mạng, cho rằng “bạo lực là bà đỡ của một chế độ xã hội cũ đang thai nghén một chế độ mới” và không có bạo lực cách mạng thì không thể giành chính quyền từ tay kẻ thù.\n\nTrong bộ Tư bản, quyển I, tập thứ nhất, xuất bản lần đầu tiên năm 1867, C. Mác viết: “Bạo lực là bà đỡ của một chế độ xã hội cũ đang thai nghén một chế độ mới”. Năm 1878, trong tác phẩm Chống Đuyrinh, Ph. Ăngghen nhắc lại: "Bạo lực còn đóng một vai trò khác trong lịch sử, vai trò cách mạng; nói theo Mác, bạo lực còn là bà đỡ cho mọi xã hội cũ đang thai nghén một xã hội mới; bạo lực là công cụ mà sự vận động xã hội dùng để tự mở đường cho mình và đập tan những hình thức chính trị đã hóa đá và chết cứng"',
+          "Sự giải phóng phụ nữ luôn gắn liền với sự tiến bộ chung của dân tộc và nhân loại. Khi phụ nữ được trao quyền bình đẳng, xã hội được hưởng lợi từ trí tuệ, sức sáng tạo và tinh thần nhân văn mà họ mang lại. Giải phóng phụ nữ không chỉ là hành trình khẳng định giá trị cá nhân, mà còn là cách thức để kiến tạo một cộng đồng phát triển bền vững, nơi tự do và bình đẳng trở thành nền tảng chung cho tất cả mọi người.",
       },
     ],
   },
@@ -169,7 +93,7 @@ for (let i = 1; i < pictures.length - 1; i += 2) {
 
 pages.push({
   front: pictures[pictures.length - 1],
-  back: "Chủ Tịch Hồ Chí Minh",
+  back: "back",
 });
 
 // Bổ sung thêm trang để có thể lật tới các nội dung Trang 5,6,7,8,10
@@ -350,18 +274,26 @@ const StaticToggleButton = () => {
     <button
       className="bg-[#6256ca] text-white px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 rounded-full transition-all duration-300 text-xs sm:text-sm md:text-base min-h-[40px] sm:min-h-[44px] md:min-h-[48px] min-w-[40px] sm:min-w-[44px] md:min-w-[48px] flex items-center justify-center shadow-lg font-medium border border-white/20 active:scale-95"
       onClick={() => setStaticView(!staticView)}
-      title={staticView ? "Kích hoạt chế độ tương tác 3D" : "Chuyển sang chế độ tĩnh 2D"}
+      title={
+        staticView
+          ? "Kích hoạt chế độ tương tác 3D"
+          : "Chuyển sang chế độ tĩnh 2D"
+      }
     >
       <span className="flex items-center gap-1 sm:gap-2">
         {staticView ? (
           <>
             <span className="text-sm sm:text-base md:text-lg">✨</span>
-            <span className="hidden sm:inline text-xs sm:text-sm md:text-base">Kích Hoạt 3D</span>
+            <span className="hidden sm:inline text-xs sm:text-sm md:text-base">
+              Kích Hoạt 3D
+            </span>
           </>
         ) : (
           <>
             <span className="text-sm sm:text-base md:text-lg">⏸️</span>
-            <span className="hidden sm:inline text-xs sm:text-sm md:text-base">Tạm Dừng</span>
+            <span className="hidden sm:inline text-xs sm:text-sm md:text-base">
+              Tạm Dừng
+            </span>
           </>
         )}
       </span>
@@ -465,8 +397,12 @@ export const UI = () => {
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[-1] flex items-center justify-center">
           <div className="text-center p-4">
             <div className="animate-spin rounded-full h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 border-2 sm:border-3 md:border-4 border-purple-500 border-t-transparent mx-auto mb-3 md:mb-4"></div>
-            <div className="text-white text-base sm:text-lg md:text-xl font-medium">Đang tải nội dung...</div>
-            <div className="text-purple-300 text-xs sm:text-sm md:text-base mt-1 sm:mt-2">Vui lòng chờ trong giây lát</div>
+            <div className="text-white text-base sm:text-lg md:text-xl font-medium">
+              Đang tải nội dung...
+            </div>
+            <div className="text-purple-300 text-xs sm:text-sm md:text-base mt-1 sm:mt-2">
+              Vui lòng chờ trong giây lát
+            </div>
           </div>
         </div>
       )}
@@ -476,8 +412,12 @@ export const UI = () => {
         <div className="flex justify-between items-start p-3 sm:p-4 md:p-6 gap-2 sm:gap-3 md:gap-4">
           <div className="pointer-events-auto flex-shrink-0">
             <div className="bg-[#6256ca] backdrop-blur-sm rounded-lg px-2 py-1 sm:px-3 sm:py-2 md:px-4 md:py-2 border border-white/20">
-              <h1 className="text-white font-bold text-sm sm:text-base md:text-lg lg:text-xl leading-tight">VỊ NỮ</h1>
-              <p className="text-white text-xs sm:text-sm md:text-sm leading-tight">Hành trình khẳng định bản thân</p>
+              <h1 className="text-white font-bold text-sm sm:text-base md:text-lg lg:text-xl leading-tight">
+                VỊ NỮ
+              </h1>
+              <p className="text-white text-xs sm:text-sm md:text-sm leading-tight">
+                Hành trình khẳng định bản thân
+              </p>
             </div>
           </div>
 
@@ -544,7 +484,9 @@ export const UI = () => {
                 >
                   <div className="flex items-center gap-1 sm:gap-2">
                     <span className="text-sm sm:text-base md:text-lg">📖</span>
-                    <span className="hidden xs:inline text-xs sm:text-sm md:text-base">Bìa Trước</span>
+                    <span className="hidden xs:inline text-xs sm:text-sm md:text-base">
+                      Bìa Trước
+                    </span>
                   </div>
                   {0 === page && (
                     <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-lg sm:rounded-xl"></div>
@@ -565,9 +507,15 @@ export const UI = () => {
                       onClick={() => handlePageClick(pageNum)}
                     >
                       <div className="flex items-center gap-1 sm:gap-2">
-                        <span className="text-sm sm:text-base md:text-lg">✨</span>
-                        <span className="hidden sm:inline text-xs sm:text-sm md:text-base">Chương </span>
-                        <span className="text-xs sm:text-sm md:text-base">{pageNum}</span>
+                        <span className="text-sm sm:text-base md:text-lg">
+                          ✨
+                        </span>
+                        <span className="hidden sm:inline text-xs sm:text-sm md:text-base">
+                          Chương{" "}
+                        </span>
+                        <span className="text-xs sm:text-sm md:text-base">
+                          {pageNum}
+                        </span>
                       </div>
                       {pageNum === page && (
                         <div className="absolute inset-0 bg-[#6256ca]/20 rounded-lg sm:rounded-xl"></div>
@@ -587,7 +535,9 @@ export const UI = () => {
                 >
                   <div className="flex items-center gap-1 sm:gap-2">
                     <span className="text-sm sm:text-base md:text-lg">🌟</span>
-                    <span className="hidden xs:inline text-xs sm:text-sm md:text-base">Bìa Sau</span>
+                    <span className="hidden xs:inline text-xs sm:text-sm md:text-base">
+                      Bìa Sau
+                    </span>
                   </div>
                   {page === pages.length && (
                     <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-lg sm:rounded-xl"></div>
@@ -625,7 +575,9 @@ export const UI = () => {
         >
           <span className="flex items-center gap-1 sm:gap-2">
             <span className="text-sm sm:text-base md:text-lg">✕</span>
-            <span className="hidden sm:inline text-xs sm:text-sm md:text-base">Đóng Sách</span>
+            <span className="hidden sm:inline text-xs sm:text-sm md:text-base">
+              Đóng Sách
+            </span>
           </span>
         </button>
       )}
@@ -637,14 +589,18 @@ export const UI = () => {
         title="Trợ lý AI - Hỏi về tư tưởng Hồ Chí Minh và nữ quyền"
       >
         <div className="flex flex-col items-center">
-          <span className="text-lg sm:text-xl md:text-2xl group-hover:scale-110 transition-transform">🤖</span>
-          <span className="text-xs sm:text-xs md:text-xs mt-0 sm:mt-1 opacity-80">AI</span>
+          <span className="text-lg sm:text-xl md:text-2xl group-hover:scale-110 transition-transform">
+            🤖
+          </span>
+          <span className="text-xs sm:text-xs md:text-xs mt-0 sm:mt-1 opacity-80">
+            AI
+          </span>
         </div>
       </button>
 
       {/* AI Chat Component */}
-      <AIChat 
-        isOpen={aiChatOpen} 
+      <AIChat
+        isOpen={aiChatOpen}
         onClose={() => setAiChatOpen(false)}
         currentPage={page}
       />

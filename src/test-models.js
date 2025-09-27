@@ -2,7 +2,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 
 // Test function để kiểm tra models available
 async function testGeminiModels() {
-  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  const apiKey = "AIzaSyDDQpPl-bcYirclhdvvUToSu2dIeH92sdA";
   
   if (!apiKey) {
     console.error('API key not found');

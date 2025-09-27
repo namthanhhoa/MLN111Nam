@@ -2,11 +2,11 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 
 class GeminiService {
   constructor() {
-    // Lấy API key từ environment variables
-        const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-    
+    // Sử dụng API key được cung cấp trực tiếp (không dùng .env)
+    const apiKey = "AIzaSyDDQpPl-bcYirclhdvvUToSu2dIeH92sdA";
+
     if (!apiKey) {
-      throw new Error('VITE_GEMINI_API_KEY không được tìm thấy trong environment variables');
+      throw new Error('Gemini API key is missing');
     }
 
     this.genAI = new GoogleGenerativeAI(apiKey);

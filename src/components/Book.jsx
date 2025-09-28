@@ -25,9 +25,9 @@ const insideCurveStrength = 0.18; // Controls the strength of the curve
 const outsideCurveStrength = 0.05; // Controls the strength of the curve
 const turningCurveStrength = 0.09; // Controls the strength of the curve
 
-const PAGE_WIDTH = 1.28;
-const PAGE_HEIGHT = 1.71; // 4:3 aspect ratio
-const PAGE_DEPTH = 0.003;
+const PAGE_WIDTH = 1.92;
+const PAGE_HEIGHT = 2.565; // 4:3 aspect ratio
+const PAGE_DEPTH = 0.0045;
 const PAGE_SEGMENTS = 30;
 const SEGMENT_WIDTH = PAGE_WIDTH / PAGE_SEGMENTS;
 
@@ -68,14 +68,14 @@ pageGeometry.setAttribute(
 );
 
 const whiteColor = new Color("white");
-const emissiveColor = new Color("green");
+const emissiveColor = new Color("white");
 
 const pageMaterials = [
   new MeshStandardMaterial({
     color: whiteColor,
   }),
   new MeshStandardMaterial({
-    color: "#111",
+    color: whiteColor,
   }),
   new MeshStandardMaterial({
     color: whiteColor,
@@ -160,8 +160,8 @@ const Page = ({ number, front, back, page, opened, bookClosed, ...props }) => {
       }),
     ];
     const mesh = new SkinnedMesh(pageGeometry, materials);
-    mesh.castShadow = true;
-    mesh.receiveShadow = true;
+    mesh.castShadow = false; // Tắt bóng đổ
+    mesh.receiveShadow = false; // Tắt nhận bóng
     mesh.frustumCulled = false;
     mesh.add(skeleton.bones[0]);
     mesh.bind(skeleton);
@@ -175,13 +175,10 @@ const Page = ({ number, front, back, page, opened, bookClosed, ...props }) => {
       return;
     }
 
-    const emissiveIntensity = highlighted ? 0.12 : 0;
+    // Tắt highlight hoàn toàn
+    const emissiveIntensity = 0; // Luôn = 0, không phụ thuộc highlighted
     skinnedMeshRef.current.material[4].emissiveIntensity =
-      skinnedMeshRef.current.material[5].emissiveIntensity = MathUtils.lerp(
-        skinnedMeshRef.current.material[4].emissiveIntensity,
-        emissiveIntensity,
-        0.1
-      );
+      skinnedMeshRef.current.material[5].emissiveIntensity = 0;
 
     if (lastOpened.current !== opened) {
       turnedAt.current = +new Date();
@@ -253,22 +250,15 @@ const Page = ({ number, front, back, page, opened, bookClosed, ...props }) => {
     <group
       {...props}
       ref={group}
-      onPointerEnter={(e) => {
-        if (staticView) return;
-        e.stopPropagation();
-        setHighlighted(true);
-      }}
-      onPointerLeave={(e) => {
-        if (staticView) return;
-        e.stopPropagation();
-        setHighlighted(false);
-      }}
+      // Tắt highlight events
+      onPointerEnter={undefined}
+      onPointerLeave={undefined}
       onClick={(e) => {
         e.stopPropagation();
         if (!staticView) {
           setPage(opened ? number : number + 1);
         }
-        setHighlighted(false);
+        // Không cần setHighlighted nữa
       }}
     >
       <primitive

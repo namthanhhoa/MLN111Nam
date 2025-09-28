@@ -12,17 +12,17 @@ function App() {
     <>
       {/* Custom mouse cursor */}
       <MouseCursor />
-      
+
       {/* <TestGemini /> */}
       <UI />
       <Loader />
       <Canvas
-        shadows
+        shadows={false} // Tắt shadows hoàn toàn
         camera={{
           position: [-0.5, 1, window.innerWidth > 800 ? 4 : 9],
           fov: 45,
         }}
-        style={{ cursor: 'none' }} // Ẩn cursor mặc định
+        style={{ cursor: "none" }} // Ẩn cursor mặc định
       >
         <group position-y={0}>
           <Suspense fallback={null}>

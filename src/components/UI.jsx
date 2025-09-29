@@ -1,5 +1,7 @@
 import { atom, useAtom } from "jotai";
 import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebook, faTiktok } from '@fortawesome/free-brands-svg-icons';
 import AIChat from "./AIChat.jsx";
 import Podcast from "./Podcast.jsx";
 import Quiz from "./Quiz.jsx";
@@ -271,7 +273,7 @@ const PageContent = ({ pageNumber, isOpen }) => {
 
         {/* Nút chuyển đổi phần */}
         {sections.length > 1 && (
-          <div className="flex justify-between items-center mt-4 lg:mt-6 gap-4 relative z-60 pt-4 border-t border-white/10">
+          <div className="flex justif   y-between items-center mt-4 lg:mt-6 gap-4 relative z-60 pt-4 border-t border-white/10">
             <button
               className={`px-4 py-2 rounded-lg text-sm transition-all duration-300 pointer-events-auto cursor-pointer relative z-70 ${
                 hasPrevSection
@@ -351,13 +353,34 @@ export const UI = () => {
   const [page, setPage] = useAtom(pageAtom);
   const [bookOpen, setBookOpen] = useAtom(bookOpenAtom);
   const [staticView] = useAtom(staticViewAtom);
-  const [bgKey, setBgKey] = useState("1");
   const [audioEnabled, setAudioEnabled] = useState(false);
-  const [currentVideo, setCurrentVideo] = useState(null);
+  const [currentVideo] = useState(null);
   const [videoLoading, setVideoLoading] = useState(false);
   const [aiChatOpen, setAiChatOpen] = useState(false);
   const [quizOpen, setQuizOpen] = useState(false);
   const [podcastOpen, setPodcastOpen] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(true);
+  const [loadingProgress, setLoadingProgress] = useState(1);
+
+  // Initial loading effect
+  useEffect(() => {
+    let interval;
+    if (initialLoading) {
+      interval = setInterval(() => {
+        setLoadingProgress((prev) => {
+          if (prev >= 100) {
+            setInitialLoading(false);
+            return 100;
+          }
+          return prev + Math.random() * 3 + 1; // Random increment cho tự nhiên hơn
+        });
+      }, 50);
+    }
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [initialLoading]);
 
   // Khởi tạo audio và enable sau user interaction
   useEffect(() => {
@@ -412,6 +435,133 @@ export const UI = () => {
 
   return (
     <>
+      {/* Cute Feminine Loading Screen */}
+      {initialLoading && (
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden" style={{ backgroundColor: '#EAF0FE' }}>
+          {/* Floating hearts background */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {[...Array(20)].map((_, i) => (
+              <div
+                key={i}
+                className="absolute opacity-20 animate-pulse"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  fontSize: `${Math.random() * 20 + 10}px`,
+                  animationDelay: `${Math.random() * 3}s`,
+                  animationDuration: `${Math.random() * 2 + 2}s`,
+                  color: '#B3A8DA'
+                }}
+              >
+                💖
+              </div>
+            ))}
+            {[...Array(15)].map((_, i) => (
+              <div
+                key={i + 20}
+                className="absolute opacity-15 animate-bounce"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  fontSize: `${Math.random() * 15 + 8}px`,
+                  animationDelay: `${Math.random() * 2}s`,
+                  animationDuration: `${Math.random() * 1.5 + 1}s`,
+                  color: '#B3A8DA'
+                }}
+              >
+                ✨
+              </div>
+            ))}
+            {[...Array(10)].map((_, i) => (
+              <div
+                key={i + 35}
+                className="absolute opacity-25"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  fontSize: `${Math.random() * 12 + 6}px`,
+                  animation: `float ${Math.random() * 3 + 2}s ease-in-out infinite`,
+                  animationDelay: `${Math.random() * 2}s`,
+                  color: '#B3A8DA'
+                }}
+              >
+                🌸
+              </div>
+            ))}
+          </div>
+
+          {/* Main loading content */}
+          <div className="text-center z-10 px-6">
+            {/* Logo with cute animation */}
+            <div className="mb-8 transform hover:scale-110 transition-transform duration-500">
+              <div className="text-4xl sm:text-5xl md:text-6xl font-bold mb-2 animate-pulse" style={{ color: '#B3A8DA' }}>
+                VỊ NỮ
+              </div>
+              <div className="text-sm sm:text-base md:text-lg font-medium" style={{ color: '#B3A8DA' }}>
+                Hành trình khẳng định bản thân ✨
+              </div>
+            </div>
+
+            {/* Cute loading spinner */}
+            <div className="mb-6 relative">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto relative">
+                <div className="absolute inset-0 border-4 rounded-full animate-spin" style={{ borderColor: '#B3A8DA', borderTopColor: 'transparent' }}></div>
+                <div className="absolute inset-2 border-3 rounded-full animate-spin animation-delay-150" style={{ borderColor: '#B3A8DA', borderRightColor: 'transparent' }}></div>
+                <div className="absolute inset-4 border-2 rounded-full animate-spin animation-delay-300" style={{ borderColor: '#B3A8DA', borderBottomColor: 'transparent' }}></div>
+                <div className="absolute inset-0 flex items-center justify-center text-2xl animate-bounce">
+                  💫
+                </div>
+              </div>
+            </div>
+
+            {/* Progress bar */}
+            <div className="w-64 sm:w-80 mx-auto mb-4">
+              <div className="bg-white/50 rounded-full h-3 sm:h-4 overflow-hidden shadow-inner" style={{ borderColor: '#B3A8DA', borderWidth: '1px' }}>
+                <div
+                  className="h-full rounded-full transition-all duration-300 ease-out shadow-sm relative overflow-hidden"
+                  style={{
+                    width: `${Math.min(loadingProgress, 100)}%`,
+                    backgroundColor: '#B3A8DA'
+                  }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse"></div>
+                </div>
+              </div>
+              <div className="text-center mt-2 text-sm sm:text-base font-medium" style={{ color: '#B3A8DA' }}>
+                {Math.round(loadingProgress)}% ✨
+              </div>
+            </div>
+
+            {/* Loading messages */}
+            <div className="text-sm sm:text-base font-medium animate-pulse" style={{ color: '#B3A8DA' }}>
+              {loadingProgress < 30 && "Đang chuẩn bị hành trình... 🌸"}
+              {loadingProgress >= 30 && loadingProgress < 60 && "Khám phá giá trị bản thân... 💖"}
+              {loadingProgress >= 60 && loadingProgress < 90 && "Gần hoàn thành rồi... ✨"}
+              {loadingProgress >= 90 && "Chào mừng bạn đến với VỊ NỮ! 🎉"}
+            </div>
+
+            {/* Cute decorative elements */}
+            <div className="mt-8 flex justify-center space-x-4 text-2xl sm:text-3xl">
+              <span className="animate-bounce animation-delay-0" style={{ color: '#B3A8DA' }}>🌸</span>
+              <span className="animate-bounce animation-delay-150" style={{ color: '#B3A8DA' }}>💖</span>
+              <span className="animate-bounce animation-delay-300" style={{ color: '#B3A8DA' }}>✨</span>
+              <span className="animate-bounce animation-delay-450" style={{ color: '#B3A8DA' }}>🌸</span>
+            </div>
+          </div>
+
+          {/* CSS for custom animations */}
+          <style jsx>{`
+            @keyframes float {
+              0%, 100% { transform: translateY(0px) rotate(0deg); }
+              50% { transform: translateY(-10px) rotate(180deg); }
+            }
+            .animation-delay-150 { animation-delay: 150ms; }
+            .animation-delay-300 { animation-delay: 300ms; }
+            .animation-delay-450 { animation-delay: 450ms; }
+          `}</style>
+        </div>
+      )}
+
       {quizOpen && <Quiz onClose={() => setQuizOpen(false)} />}
       {podcastOpen && <Podcast onClose={() => setPodcastOpen(false)} />}
       {/* Video background */}
@@ -457,155 +607,179 @@ export const UI = () => {
         </div>
       )}
 
-      <main className="pointer-events-none select-none z-10 fixed inset-0 flex justify-between flex-col overflow-x-hidden">
-        {/* Header with logo area */}
-        <div className="flex justify-between items-start p-3 sm:p-4 md:p-6 gap-2 sm:gap-3 md:gap-4">
-          <div className="pointer-events-auto flex-shrink-0">
-            <div className="bg-[#6256ca] backdrop-blur-sm rounded-lg px-2 py-1 sm:px-3 sm:py-2 md:px-4 md:py-2 border border-white/20">
-              <h1 className="text-white font-bold text-sm sm:text-base md:text-lg lg:text-xl leading-tight">
-                VỊ NỮ
-              </h1>
-              <p className="text-white text-xs sm:text-sm md:text-sm leading-tight">
-                Hành trình khẳng định bản thân
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
-            {/* QUIZ, Podcast, AI buttons */}
-            <div className="pointer-events-auto flex-shrink-0 bg-black/40 backdrop-blur-md rounded-full border border-white/30 p-1 flex items-center gap-1">
-              <button
-                onClick={() => setQuizOpen(true)}
-                className="bg-[#6256ca] hover:bg-purple-700 transition-colors text-white px-2 py-1 sm:px-3 sm:py-2 rounded-full text-xs sm:text-sm md:text-base focus:outline-none cursor-pointer min-w-[36px] sm:min-w-[90px] flex items-center justify-center gap-1"
-              >
-                <span>❓</span>
-                <span className="hidden sm:inline">QUIZ</span>
-              </button>
-              <button
-                onClick={() => setPodcastOpen(true)}
-                className="bg-[#6256ca] hover:bg-purple-700 transition-colors text-white px-2 py-1 sm:px-3 sm:py-2 rounded-full text-xs sm:text-sm md:text-base focus:outline-none cursor-pointer min-w-[36px] sm:min-w-[90px] flex items-center justify-center gap-1"
-              >
-                <span>🎙️</span>
-                <span className="hidden sm:inline">PODCAST</span>
-              </button>
-              <button
-                onClick={() => setAiChatOpen(true)}
-                className="bg-[#6256ca] hover:bg-purple-700 transition-colors text-white px-2 py-1 sm:px-3 sm:py-2 rounded-full text-xs sm:text-sm md:text-base focus:outline-none cursor-pointer min-w-[36px] sm:min-w-[90px] flex items-center justify-center gap-1"
-              >
-                <span>🤖</span>
-                <span className="hidden sm:inline">AI HELP</span>
-              </button>
-            </div>
-
-            {/* Static toggle button */}
+      {/* Main content - only show when loading is complete */}
+      {!initialLoading && (
+        <main className="pointer-events-none select-none z-10 fixed inset-0 flex justify-between flex-col overflow-x-hidden">
+          {/* Header with logo area */}
+          <div className="flex justify-between items-start p-2 sm:p-3 md:p-4 lg:p-6 gap-1 sm:gap-2 md:gap-3">
             <div className="pointer-events-auto flex-shrink-0">
-              <StaticToggleButton />
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom navigation - improved responsive */}
-        <div className="w-full pointer-events-auto relative z-60">
-          <div className="bg-gradient-to-t from-black/90 via-purple-900/50 to-transparent backdrop-blur-md border-t border-purple-500/30">
-            {/* Navigation buttons container */}
-            <div className="overflow-x-auto scrollbar-hide">
-              <div className="flex items-center gap-1 sm:gap-2 md:gap-3 p-2 sm:p-3 md:p-4 lg:p-6 justify-start sm:justify-center min-w-max">
-                {/* Front cover button */}
-                <button
-                  className={`transition-all duration-300 px-2 py-2 sm:px-3 sm:py-3 md:px-4 md:py-3 lg:px-6 lg:py-4 rounded-lg sm:rounded-xl text-xs sm:text-sm md:text-base font-medium shrink-0 border-2 min-h-[36px] sm:min-h-[44px] md:min-h-[48px] lg:min-h-[52px] relative overflow-hidden group active:scale-95 ${
-                    0 === page
-                      ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white border-purple-400 shadow-lg"
-                      : "bg-black/30 text-white border-white/30 hover:border-purple-400 hover:bg-purple-500/20"
-                  }`}
-                  onClick={() => handlePageClick(0)}
-                >
-                  <div className="flex items-center gap-1 sm:gap-2">
-                    <span className="text-sm sm:text-base md:text-lg">📖</span>
-                    <span className="hidden xs:inline text-xs sm:text-sm md:text-base">
-                      Bìa Trước
-                    </span>
-                  </div>
-                  {0 === page && (
-                    <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-lg sm:rounded-xl"></div>
-                  )}
-                </button>
-
-                {/* Page buttons */}
-                {[...pages].slice(1).map((_, index) => {
-                  const pageNum = index + 1;
-                  return (
-                    <button
-                      key={pageNum}
-                      className={`transition-all duration-300 px-2 py-2 sm:px-3 sm:py-3 md:px-4 md:py-3 lg:px-5 lg:py-4 rounded-lg sm:rounded-xl text-xs sm:text-sm md:text-base font-medium shrink-0 border-2 min-h-[36px] sm:min-h-[44px] md:min-h-[48px] lg:min-h-[52px] relative overflow-hidden group active:scale-95 ${
-                        pageNum === page
-                          ? "bg-[#6256ca] text-white border-[#6256ca] shadow-lg"
-                          : "bg-black/30 text-white border-white/30 hover:border-[#6256ca] hover:bg-[#6256ca]/20"
-                      }`}
-                      onClick={() => handlePageClick(pageNum)}
-                    >
-                      <div className="flex items-center gap-1 sm:gap-2">
-                        <span className="text-sm sm:text-base md:text-lg">
-                          ✨
-                        </span>
-                        <span className="hidden sm:inline text-xs sm:text-sm md:text-base">
-                          Chương{" "}
-                        </span>
-                        <span className="text-xs sm:text-sm md:text-base">
-                          {pageNum}
-                        </span>
-                      </div>
-                      {pageNum === page && (
-                        <div className="absolute inset-0 bg-[#6256ca]/20 rounded-lg sm:rounded-xl"></div>
-                      )}
-                    </button>
-                  );
-                })}
-
-                {/* Back cover button */}
-                <button
-                  className={`transition-all duration-300 px-2 py-2 sm:px-3 sm:py-3 md:px-4 md:py-3 lg:px-6 lg:py-4 rounded-lg sm:rounded-xl text-xs sm:text-sm md:text-base font-medium shrink-0 border-2 min-h-[36px] sm:min-h-[44px] md:min-h-[48px] lg:min-h-[52px] relative overflow-hidden group active:scale-95 ${
-                    page === pages.length
-                      ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white border-purple-400 shadow-lg"
-                      : "bg-black/30 text-white border-white/30 hover:border-purple-400 hover:bg-purple-500/20"
-                  }`}
-                  onClick={() => handlePageClick(pages.length)}
-                >
-                  <div className="flex items-center gap-1 sm:gap-2">
-                    <span className="text-sm sm:text-base md:text-lg">🌟</span>
-                    <span className="hidden xs:inline text-xs sm:text-sm md:text-base">
-                      Bìa Sau
-                    </span>
-                  </div>
-                  {page === pages.length && (
-                    <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-lg sm:rounded-xl"></div>
-                  )}
-                </button>
+              <div className="bg-[#6256ca] backdrop-blur-sm rounded-lg px-2 py-1 sm:px-3 sm:py-2 md:px-4 md:py-2 border border-white/20">
+                <h1 className="text-white font-bold text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl leading-tight">
+                  VỊ NỮ
+                </h1>
+                <p className="text-white text-xs sm:text-xs md:text-sm leading-tight">
+                  Hành trình khẳng định bản thân
+                </p>
               </div>
             </div>
 
-            {/* Progress indicator */}
-            <div className="px-3 sm:px-4 md:px-6 pb-2 sm:pb-3 md:pb-4">
-              <div className="w-full bg-white/20 rounded-full h-1 sm:h-2 overflow-hidden">
-                <div
-                  className="h-full bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-500 ease-out"
-                  style={{ width: `${(page / pages.length) * 100}%` }}
-                ></div>
+            <div className="flex items-center gap-1 sm:gap-2 md:gap-3">
+              {/* QUIZ, Podcast, AI, Facebook, TikTok buttons - all in one group */}
+              <div className="pointer-events-auto flex-shrink-0 bg-black/40 backdrop-blur-md rounded-full border border-white/30 p-1 flex items-center gap-0.5 sm:gap-1 overflow-x-auto scrollbar-hide">
+                <button
+                  onClick={() => setQuizOpen(true)}
+                  className="bg-[#6256ca] hover:bg-purple-700 transition-colors text-white px-1.5 py-1 sm:px-3 sm:py-2 rounded-full text-xs sm:text-sm focus:outline-none cursor-pointer min-w-[32px] sm:min-w-[80px] flex items-center justify-center gap-0.5 sm:gap-1 hover:scale-105 active:scale-95 shadow-lg flex-shrink-0"
+                  title="Trắc nghiệm"
+                >
+                  <span className="animate-pulse text-xs sm:text-sm">❓</span>
+                  <span className="hidden sm:inline text-xs">QUIZ</span>
+                </button>
+                <button
+                  onClick={() => setPodcastOpen(true)}
+                  className="bg-[#6256ca] hover:bg-purple-700 transition-colors text-white px-1.5 py-1 sm:px-3 sm:py-2 rounded-full text-xs sm:text-sm focus:outline-none cursor-pointer min-w-[32px] sm:min-w-[80px] flex items-center justify-center gap-0.5 sm:gap-1 hover:scale-105 active:scale-95 shadow-lg flex-shrink-0"
+                  title="Podcast"
+                >
+                  <span className="animate-bounce text-xs sm:text-sm">🎙️</span>
+                  <span className="hidden sm:inline text-xs">PODCAST</span>
+                </button>
+                <button
+                  onClick={() => setAiChatOpen(true)}
+                  className="bg-[#6256ca] hover:bg-purple-700 transition-colors text-white px-1.5 py-1 sm:px-3 sm:py-2 rounded-full text-xs sm:text-sm focus:outline-none cursor-pointer min-w-[32px] sm:min-w-[80px] flex items-center justify-center gap-0.5 sm:gap-1 hover:scale-105 active:scale-95 shadow-lg flex-shrink-0"
+                  title="Trợ lý AI"
+                >
+                  <span className="animate-spin text-xs sm:text-sm">🤖</span>
+                  <span className="hidden sm:inline text-xs">AI</span>
+                </button>
+                <a
+                  href="https://www.facebook.com/profile.php?id=61581248485989"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-blue-600 hover:bg-blue-700 transition-all duration-300 text-white px-1.5 py-1 sm:px-3 sm:py-2 rounded-full text-xs sm:text-sm focus:outline-none cursor-pointer min-w-[32px] flex items-center justify-center hover:scale-110 active:scale-95 shadow-lg flex-shrink-0"
+                  title="Theo dõi Facebook"
+                >
+                  <FontAwesomeIcon icon={faFacebook} className="text-sm sm:text-lg" />
+                </a>
+                <a
+                  href="https://www.tiktok.com/@chandungvinu"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-black hover:bg-gray-800 transition-all duration-300 text-white px-1.5 py-1 sm:px-3 sm:py-2 rounded-full text-xs sm:text-sm focus:outline-none cursor-pointer min-w-[32px] flex items-center justify-center hover:scale-110 active:scale-95 shadow-lg flex-shrink-0"
+                  title="Theo dõi TikTok"
+                >
+                  <FontAwesomeIcon icon={faTiktok} className="text-sm sm:text-lg" />
+                </a>
               </div>
-              <div className="text-center mt-1 sm:mt-2">
-                <span className="text-white/70 text-xs sm:text-sm">
-                  Chương {page} / {pages.length}
-                </span>
+
+              {/* Static toggle button */}
+              <div className="pointer-events-auto flex-shrink-0">
+                <StaticToggleButton />
               </div>
             </div>
           </div>
-        </div>
-      </main>
+
+          {/* Bottom navigation - improved responsive */}
+          <div className="w-full pointer-events-auto relative z-60">
+            <div className="bg-gradient-to-t from-black/90 via-purple-900/50 to-transparent backdrop-blur-md border-t border-purple-500/30">
+              {/* Navigation buttons container */}
+              <div className="overflow-x-auto scrollbar-hide">
+                <div className="flex items-center gap-1 sm:gap-2 md:gap-3 p-2 sm:p-3 md:p-4 lg:p-6 justify-center min-w-max">
+                  {/* Front cover button */}
+                  <button
+                    className={`transition-all duration-300 px-2 py-2 sm:px-3 sm:py-3 md:px-4 md:py-3 lg:px-6 lg:py-4 rounded-lg sm:rounded-xl text-xs sm:text-sm md:text-base font-medium shrink-0 border-2 min-h-[36px] sm:min-h-[44px] md:min-h-[48px] lg:min-h-[52px] relative overflow-hidden group active:scale-95 ${
+                      0 === page
+                        ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white border-purple-400 shadow-lg"
+                        : "bg-black/30 text-white border-white/30 hover:border-purple-400 hover:bg-purple-500/20"
+                    }`}
+                    onClick={() => handlePageClick(0)}
+                  >
+                    <div className="flex items-center gap-1 sm:gap-2">
+                      <span className="text-sm sm:text-base md:text-lg">📖</span>
+                      <span className="hidden xs:inline text-xs sm:text-sm md:text-base">
+                        Bìa Trước
+                      </span>
+                    </div>
+                    {0 === page && (
+                      <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-lg sm:rounded-xl"></div>
+                    )}
+                  </button>
+
+                  {/* Page buttons */}
+                  {[...pages].slice(1).map((_, index) => {
+                    const pageNum = index + 1;
+                    return (
+                      <button
+                        key={pageNum}
+                        className={`transition-all duration-300 px-2 py-2 sm:px-3 sm:py-3 md:px-4 md:py-3 lg:px-5 lg:py-4 rounded-lg sm:rounded-xl text-xs sm:text-sm md:text-base font-medium shrink-0 border-2 min-h-[36px] sm:min-h-[44px] md:min-h-[48px] lg:min-h-[52px] relative overflow-hidden group active:scale-95 ${
+                          pageNum === page
+                            ? "bg-[#6256ca] text-white border-[#6256ca] shadow-lg"
+                            : "bg-black/30 text-white border-white/30 hover:border-[#6256ca] hover:bg-[#6256ca]/20"
+                        }`}
+                        onClick={() => handlePageClick(pageNum)}
+                      >
+                        <div className="flex items-center gap-1 sm:gap-2">
+                          <span className="text-sm sm:text-base md:text-lg">
+                            ✨
+                          </span>
+                          <span className="hidden sm:inline text-xs sm:text-sm md:text-base">
+                            Chương{" "}
+                          </span>
+                          <span className="text-xs sm:text-sm md:text-base">
+                            {pageNum}
+                          </span>
+                        </div>
+                        {pageNum === page && (
+                          <div className="absolute inset-0 bg-[#6256ca]/20 rounded-lg sm:rounded-xl"></div>
+                        )}
+                      </button>
+                    );
+                  })}
+
+                  {/* Back cover button */}
+                  <button
+                    className={`transition-all duration-300 px-2 py-2 sm:px-3 sm:py-3 md:px-4 md:py-3 lg:px-6 lg:py-4 rounded-lg sm:rounded-xl text-xs sm:text-sm md:text-base font-medium shrink-0 border-2 min-h-[36px] sm:min-h-[44px] md:min-h-[48px] lg:min-h-[52px] relative overflow-hidden group active:scale-95 ${
+                      page === pages.length
+                        ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white border-purple-400 shadow-lg"
+                        : "bg-black/30 text-white border-white/30 hover:border-purple-400 hover:bg-purple-500/20"
+                    }`}
+                    onClick={() => handlePageClick(pages.length)}
+                  >
+                    <div className="flex items-center gap-1 sm:gap-2">
+                      <span className="text-sm sm:text-base md:text-lg">🌟</span>
+                      <span className="hidden xs:inline text-xs sm:text-sm md:text-base">
+                        Bìa Sau
+                      </span>
+                    </div>
+                    {page === pages.length && (
+                      <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-lg sm:rounded-xl"></div>
+                    )}
+                  </button>
+                </div>
+              </div>
+
+              {/* Progress indicator */}
+              <div className="px-3 sm:px-4 md:px-6 pb-2 sm:pb-3 md:pb-4">
+                <div className="w-full bg-white/20 rounded-full h-1 sm:h-2 overflow-hidden">
+                  <div
+                    className="h-full bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-500 ease-out"
+                    style={{ width: `${(page / pages.length) * 100}%` }}
+                  ></div>
+                </div>
+                <div className="text-center mt-1 sm:mt-2">
+                  <span className="text-white/70 text-xs sm:text-sm">
+                    Chương {page} / {pages.length}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      )}
 
       {/* Hiển thị nội dung trang khi sách mở */}
       <PageContent pageNumber={page} isOpen={bookOpen} />
 
       {/* Close book button - responsive */}
-      {bookOpen && (
+      {bookOpen && !initialLoading && (
         <button
           className="fixed top-3 right-3 sm:top-4 sm:right-4 md:top-6 md:right-6 z-50 bg-[#6256ca] text-white px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 rounded-full transition-all duration-300 text-xs sm:text-sm md:text-base min-h-[36px] sm:min-h-[44px] md:min-h-[48px] min-w-[36px] sm:min-w-[44px] md:min-w-[48px] flex items-center justify-center shadow-lg font-medium border border-white/20 active:scale-95"
           onClick={() => setBookOpen(false)}
@@ -620,11 +794,13 @@ export const UI = () => {
       )}
 
       {/* AI Chat Component */}
-      <AIChat
-        isOpen={aiChatOpen}
-        onClose={() => setAiChatOpen(false)}
-        currentPage={page}
-      />
+      {!initialLoading && (
+        <AIChat
+          isOpen={aiChatOpen}
+          onClose={() => setAiChatOpen(false)}
+          currentPage={page}
+        />
+      )}
     </>
   );
 };

@@ -61,7 +61,7 @@ const MouseCursor = () => {
         // Bước 4: Ẩn hình sau 1 giây
         setTimeout(() => {
           setTrailImages(prev => prev.filter(img => img.id !== newImage.id));
-        }, 1000);
+        }, 700); // Đã là 700ms (0.7s) như yêu cầu
       }
     };
 
@@ -140,4 +140,3 @@ const MouseCursor = () => {
 };
 
 export default MouseCursor;
-

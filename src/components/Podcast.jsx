@@ -139,7 +139,7 @@ const Podcast = ({ onClose }) => {
             <div className="mt-3 pt-3 border-t border-purple-500/30">
               <p className="text-xs sm:text-sm text-gray-400 text-center flex items-center justify-center gap-2">
                 <span>👆</span>
-                <span>Chạm để chọn tập podcast</span>
+                <span>Kéo xuống và chạm để chọn tập podcast</span>
               </p>
             </div>
           </div>

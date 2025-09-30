@@ -4,14 +4,17 @@ const podcasts = [
   {
     title: "Podcast #1 - Phụ nữ sinh ra hay trở thành?",
     videoId: "V_iJHDd96EI",
+    duration: "07:21", // Thời gian thực tế của video
   },
   {
     title: "Podcast #2 - Phụ nữ dưới bóng \"tha thể\"",
     videoId: "ZWreanBWyek",
+    duration: "07:11", // Thời gian thực tế của video
   },
   {
     title: "Hành trình khẳng định bản thân",
     videoId: "BgCry3hGT9U",
+    duration: "32:15", // Thời gian thực tế của video
   },
 ];
 
@@ -114,7 +117,7 @@ const Podcast = ({ onClose }) => {
                       {/* Duration - visible on all sizes */}
                       <div className="text-xs sm:text-sm text-gray-400 mt-1 flex items-center gap-1">
                         <span>⏱️</span>
-                        <span>~ {Math.floor(Math.random() * 20 + 10)} phút</span>
+                        <span>{podcast.duration}</span>
                       </div>
                     </div>
 

@@ -435,7 +435,7 @@ export const UI = () => {
 
   // Tự động mở sách khi click vào trang
   const handlePageClick = (pageNumber) => {
-    if (staticView) return; // chặn đổi trang ở chế độ 2D cố định
+    // Cho phép đổi trang trong mọi trường hợp
     setPage(pageNumber);
     setBookOpen(true);
   };

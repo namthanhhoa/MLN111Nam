@@ -12,7 +12,8 @@
 input,
 textarea,
 button,
-select {
+select,
+a {
   cursor: pointer !important;
 }
 

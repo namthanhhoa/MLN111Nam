@@ -255,9 +255,8 @@ const Page = ({ number, front, back, page, opened, bookClosed, ...props }) => {
       onPointerLeave={undefined}
       onClick={(e) => {
         e.stopPropagation();
-        if (!staticView) {
-          setPage(opened ? number : number + 1);
-        }
+        // Cho phép lật trang trong mọi trường hợp, kể cả khi sách đứng thẳng
+        setPage(opened ? number : number + 1);
         // Không cần setHighlighted nữa
       }}
     >

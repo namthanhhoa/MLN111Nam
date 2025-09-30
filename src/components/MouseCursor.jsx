@@ -1,33 +1,35 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 
 const MouseCursor = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [trailImages, setTrailImages] = useState([]);
+  const [floatingHearts, setFloatingHearts] = useState([]);
   const [isVisible, setIsVisible] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const lastPositionRef = useRef({ x: 0, y: 0 });
-  const imageCounterRef = useRef(1);
 
   // Kiểm tra thiết bị mobile
   useEffect(() => {
     const checkMobile = () => {
-      const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
-                           window.innerWidth <= 768 ||
-                           ('ontouchstart' in window);
+      const isMobileDevice =
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        ) ||
+        window.innerWidth <= 768 ||
+        "ontouchstart" in window;
       setIsMobile(isMobileDevice);
     };
 
     checkMobile();
-    window.addEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
 
     return () => {
-      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener("resize", checkMobile);
     };
   }, []);
 
-  // Bước 1: Di chuyển theo tọa độ chuột
+  // Theo dõi chuột và tạo trái tim bay
   useEffect(() => {
-    // Không chạy effects trên mobile
+    // Không chạy trên mobile
     if (isMobile) return;
 
     const updateMousePosition = (e) => {
@@ -35,33 +37,36 @@ const MouseCursor = () => {
       setMousePosition(newPosition);
       setIsVisible(true);
 
-      // Bước 2: Chỉ tạo hình mới khi di chuyển đủ khoảng cách (50px)
+      // Tạo trái tim bay khi di chuyển đủ khoảng cách
       const distance = Math.sqrt(
-        Math.pow(newPosition.x - lastPositionRef.current.x, 2) + 
-        Math.pow(newPosition.y - lastPositionRef.current.y, 2)
+        Math.pow(newPosition.x - lastPositionRef.current.x, 2) +
+          Math.pow(newPosition.y - lastPositionRef.current.y, 2)
       );
 
-      if (distance > 50) { // Khoảng cách tối thiểu 50px
-        // Bước 3: Tạo hình mới với thứ tự đúng (1->2->3->1...)
-        const newImage = {
-          id: Date.now(),
-          x: newPosition.x,
-          y: newPosition.y,
-          imageNumber: imageCounterRef.current,
+      if (distance > 30) {
+        // Khoảng cách tối thiểu 30px
+        // Tạo trái tim mới
+        const newHeart = {
+          id: Date.now() + Math.random(),
+          x: newPosition.x + (Math.random() - 0.5) * 40, // Random offset
+          y: newPosition.y + (Math.random() - 0.5) * 40,
           opacity: 1,
-          zIndex: imageCounterRef.current // Z-index tăng dần để đè đúng thứ tự
+          scale: 0.5 + Math.random() * 0.5, // Random scale 0.5-1
+          emoji: Math.random() > 0.3 ? "💖" : Math.random() > 0.5 ? "💝" : "💕", // Random heart emojis
+          velocityX: (Math.random() - 0.5) * 2, // Random horizontal velocity
+          velocityY: -2 - Math.random() * 2, // Upward velocity
+          rotation: Math.random() * 360, // Random rotation
         };
 
-        setTrailImages(prev => [...prev, newImage]);
+        setFloatingHearts((prev) => [...prev, newHeart]);
         lastPositionRef.current = newPosition;
 
-        // Cập nhật counter (1->2->3->1...)
-        imageCounterRef.current = imageCounterRef.current === 3 ? 1 : imageCounterRef.current + 1;
-
-        // Bước 4: Ẩn hình sau 1 giây
+        // Xóa trái tim sau 3 giây
         setTimeout(() => {
-          setTrailImages(prev => prev.filter(img => img.id !== newImage.id));
-        }, 700); // Đã là 700ms (0.7s) như yêu cầu
+          setFloatingHearts((prev) =>
+            prev.filter((heart) => heart.id !== newHeart.id)
+          );
+        }, 3000);
       }
     };
 
@@ -73,15 +78,39 @@ const MouseCursor = () => {
       setIsVisible(true);
     };
 
-    window.addEventListener('mousemove', updateMousePosition);
-    document.addEventListener('mouseleave', handleMouseLeave);
-    document.addEventListener('mouseenter', handleMouseEnter);
+    window.addEventListener("mousemove", updateMousePosition);
+    document.addEventListener("mouseleave", handleMouseLeave);
+    document.addEventListener("mouseenter", handleMouseEnter);
 
     return () => {
-      window.removeEventListener('mousemove', updateMousePosition);
-      document.removeEventListener('mouseleave', handleMouseLeave);
-      document.removeEventListener('mouseenter', handleMouseEnter);
+      window.removeEventListener("mousemove", updateMousePosition);
+      document.removeEventListener("mouseleave", handleMouseLeave);
+      document.removeEventListener("mouseenter", handleMouseEnter);
     };
+  }, [isMobile]);
+
+  // Animation cho trái tim bay
+  useEffect(() => {
+    if (isMobile) return;
+
+    const animateHearts = () => {
+      setFloatingHearts((prev) =>
+        prev
+          .map((heart) => ({
+            ...heart,
+            x: heart.x + heart.velocityX,
+            y: heart.y + heart.velocityY,
+            opacity: Math.max(0, heart.opacity - 0.02), // Fade out dần
+            scale: heart.scale + 0.01, // Scale up dần
+            rotation: heart.rotation + 2, // Rotate
+          }))
+          .filter((heart) => heart.opacity > 0)
+      );
+    };
+
+    const animationInterval = setInterval(animateHearts, 16); // ~60fps
+
+    return () => clearInterval(animationInterval);
   }, [isMobile]);
 
   // Không render gì trên mobile
@@ -89,52 +118,76 @@ const MouseCursor = () => {
 
   return (
     <>
-      {/* Hiển thị tất cả hình ảnh trail */}
-      {trailImages.map((imageData) => (
+      {/* Floating hearts */}
+      {floatingHearts.map((heart) => (
         <div
-          key={imageData.id}
-          className="fixed pointer-events-none transition-opacity duration-300"
+          key={heart.id}
+          className="fixed pointer-events-none z-[9999] transition-all duration-100"
           style={{
-            left: imageData.x,
-            top: imageData.y,
-            transform: 'translate(-50%, -50%)',
-            zIndex: 9999 + imageData.zIndex, // Z-index tăng dần
-            opacity: imageData.opacity
+            left: heart.x,
+            top: heart.y,
+            transform: `translate(-50%, -50%) scale(${heart.scale}) rotate(${heart.rotation}deg)`,
+            opacity: heart.opacity,
+            fontSize: "24px",
+            textShadow: "0 0 10px rgba(255, 182, 193, 0.8)",
+            animation: `heartPulse ${2 + Math.random()}s ease-in-out infinite`,
           }}
         >
-          <img
-            src={`/mouse/${imageData.imageNumber}.png`}
-            alt={`Mouse cursor ${imageData.imageNumber}`}
-            className="w-16 h-16 object-contain"
-            style={{
-              filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))',
-              imageRendering: 'crisp-edges'
-            }}
-            draggable={false}
-          />
+          {heart.emoji}
         </div>
       ))}
 
-      {/* Cursor chính luôn theo chuột (hình 1) */}
+      {/* Main cursor - trái tim chính theo chuột */}
       <div
-        className="fixed pointer-events-none z-[9999] transition-all duration-100 ease-out"
+        className="fixed pointer-events-none z-[9999] transition-all duration-75 ease-out"
         style={{
           left: mousePosition.x,
           top: mousePosition.y,
-          transform: 'translate(-50%, -50%)'
+          transform: "translate(-50%, -50%) scale(1.2)",
         }}
       >
-        <img
-          src="/mouse/1.png"
-          alt="Main cursor"
-          className="w-12 h-12 object-contain opacity-80"
+        <div
+          className="relative"
           style={{
-            filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.4))',
-            imageRendering: 'crisp-edges'
+            fontSize: "20px",
+            textShadow:
+              "0 0 15px rgba(255, 182, 193, 1), 0 0 25px rgba(255, 105, 180, 0.6)",
+            animation: "heartBeat 1.5s ease-in-out infinite",
+            filter: "drop-shadow(0 0 8px rgba(255, 182, 193, 0.8))",
           }}
-          draggable={false}
-        />
+        >
+          💖
+        </div>
       </div>
+
+      {/* CSS animations */}
+      <style jsx>{`
+        @keyframes heartBeat {
+          0%,
+          100% {
+            transform: scale(1);
+          }
+          25% {
+            transform: scale(1.1);
+          }
+          50% {
+            transform: scale(1.05);
+          }
+          75% {
+            transform: scale(1.15);
+          }
+        }
+
+        @keyframes heartPulse {
+          0%,
+          100% {
+            filter: brightness(1) hue-rotate(0deg);
+          }
+          50% {
+            filter: brightness(1.3) hue-rotate(10deg);
+          }
+        }
+      `}</style>
     </>
   );
 };

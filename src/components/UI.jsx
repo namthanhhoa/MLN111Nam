@@ -124,6 +124,37 @@ const pageContents = {
       },
     ],
   },
+  6: {
+    title: "📚 Nguồn và Tài liệu tham khảo",
+    sections: [
+      {
+        content:
+          "LỜI KẾT\n" +
+          "\n" +
+          "Trong quá trình tìm hiểu và xây dựng nội dung, nhóm dựa vào các nguồn triết học và tư tưởng lớn:\n" +
+          "\n" +
+          'Simone de Beauvoir – Le Deuxième Sexe (1949): "Người ta không sinh ra đã là phụ nữ, mà trở thành phụ nữ." → Tác phẩm nền tảng cho triết học nữ quyền hiện đại.\n' +
+          "\n" +
+          "Hồ Chí Minh – Lời kêu gọi Toàn quốc kháng chiến (1946), Thư gửi phụ nữ nhân dịp Hai Bà Trưng (1952): khẳng định vai trò, sức mạnh và tinh thần yêu nước của phụ nữ Việt Nam.\n" +
+          "\n" +
+          "F. Engels – Nguồn gốc của gia đình, chế độ tư hữu và Nhà nước (1884): phân tích địa vị phụ nữ trong mối quan hệ gia đình – xã hội, đặt nền tảng cho việc nhìn nhận phụ nữ trong bối cảnh kinh tế – chính trị.\n" +
+          "\n" +
+          "Các trích đoạn khác từ Beauvoir (Hiện hữu có trước bản chất, Tự do của mình gắn liền với tự do của người khác) cho thấy chiều sâu triết lý hiện sinh khi bàn về nữ quyền.\n" +
+          "\n" +
+          "📝 Kết luận\n" +
+          "\n" +
+          '"Chân dung Vị Nữ" không chỉ là một tập hợp trích dẫn, mà là bức tranh khái quát về hành trình tư tưởng:\n' +
+          "\n" +
+          "Từ triết học hiện sinh (Beauvoir) → phụ nữ không mang sẵn bản chất, họ kiến tạo chính mình qua tự do và lựa chọn.\n" +
+          "\n" +
+          "Từ chủ nghĩa duy vật lịch sử (Engels) → bình đẳng giới không thể tách rời khỏi quan hệ sản xuất và cấu trúc xã hội.\n" +
+          "\n" +
+          "Từ tư tưởng cách mạng Việt Nam (Hồ Chí Minh) → phụ nữ vừa là người giữ gìn văn hóa, vừa là lực lượng tiên phong trong đấu tranh độc lập dân tộc.\n" +
+          "\n" +
+          "👉 Như vậy, nữ quyền không chỉ là một phong trào xã hội, mà là một hành trình triết học và nhân văn. Hành trình ấy khẳng định rằng: tự do của phụ nữ cũng chính là thước đo tự do của cả nhân loại.",
+      },
+    ],
+  },
 };
 
 export const pages = [

@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 
 const podcasts = [
   {
-    title: "Nữ quyền và Tự do cá nhân",
-    videoId: "y1cBhJLNNXU",
+    title: "Podcast #1 - Phụ nữ sinh ra hay trở thành?",
+    videoId: "V_iJHDd96EI",
   },
   {
-    title: "Phá bỏ định kiến giới",
-    videoId: "m9w68TUNZ_k",
+    title: "Podcast #2 - Phụ nữ dưới bóng \"tha thể\"",
+    videoId: "ZWreanBWyek",
   },
   {
     title: "Hành trình khẳng định bản thân",

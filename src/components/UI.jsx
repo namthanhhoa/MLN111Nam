@@ -731,77 +731,226 @@ export const UI = () => {
       {!initialLoading && (
         <main className="pointer-events-none select-none z-10 fixed inset-0 flex justify-between flex-col overflow-x-hidden">
           {/* Header with logo area */}
-          <div className="flex justify-between items-start p-2 sm:p-3 md:p-4 lg:p-6 gap-1 sm:gap-2 md:gap-3">
-            <div className="pointer-events-auto flex-shrink-0">
-              <div className="bg-[#6256ca] backdrop-blur-sm rounded-lg px-2 py-1 sm:px-3 sm:py-2 md:px-4 md:py-2 border border-white/20">
-                <h1 className="text-white font-bold text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl leading-tight">
-                  VỊ NỮ
-                </h1>
-                <p className="text-white text-xs sm:text-xs md:text-sm leading-tight">
-                  Hành trình khẳng định bản thân
-                </p>
+          <div className="p-2 sm:p-3 md:p-4 lg:p-6 gap-1 sm:gap-2 md:gap-3">
+            {/* Desktop layout: Logo left, buttons right */}
+            <div className="hidden lg:flex justify-between items-start">
+              <div className="pointer-events-auto flex-shrink-0">
+                <div className="bg-[#6256ca] backdrop-blur-sm rounded-lg px-2 py-1 sm:px-3 sm:py-2 md:px-4 md:py-2 border border-white/20">
+                  <h1 className="text-white font-bold text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl leading-tight">
+                    VỊ NỮ
+                  </h1>
+                  <p className="text-white text-xs sm:text-xs md:text-sm leading-tight">
+                    Hành trình khẳng định bản thân
+                  </p>
+                </div>
+              </div>
+
+              {/* Desktop: Action buttons on the right */}
+              <div className="flex items-center gap-1 sm:gap-2 md:gap-3">
+                {/* ...existing desktop buttons code... */}
+                <div className="pointer-events-auto flex-shrink-0 bg-gradient-to-r from-purple-900/70 via-pink-900/70 to-purple-900/70 backdrop-blur-xl rounded-xl border border-purple-400/40 shadow-xl p-1.5 sm:p-2 flex items-center gap-1 sm:gap-2 overflow-x-auto scrollbar-hide">
+                  <button
+                    onClick={() => setQuizOpen(true)}
+                    className="group relative bg-gradient-to-br from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 transition-all duration-300 text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-xs font-bold focus:outline-none cursor-pointer min-w-[50px] sm:min-w-[70px] flex flex-col items-center justify-center gap-0.5 hover:scale-105 active:scale-95 shadow-md hover:shadow-lg transform-gpu flex-shrink-0 border border-white/20 hover:border-white/40"
+                    title="Trắc nghiệm kiến thức về Vị Nữ"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/15 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+                    <span className="text-sm animate-bounce group-hover:animate-pulse relative z-10">
+                      🧠
+                    </span>
+                    <span className="text-xs font-extrabold relative z-10 tracking-wide">
+                      QUIZ
+                    </span>
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-yellow-400 to-red-400 rounded-lg blur opacity-20 group-hover:opacity-40 transition-opacity duration-200 -z-10"></div>
+                  </button>
+
+                  <button
+                    onClick={() => setPodcastOpen(true)}
+                    className="group relative bg-gradient-to-br from-purple-500 via-pink-500 to-purple-600 hover:from-purple-400 hover:via-pink-400 hover:to-purple-500 transition-all duration-300 text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-xs font-bold focus:outline-none cursor-pointer min-w-[50px] sm:min-w-[70px] flex flex-col items-center justify-center gap-0.5 hover:scale-105 active:scale-95 shadow-md hover:shadow-lg transform-gpu flex-shrink-0 border border-white/20 hover:border-white/40"
+                    title="Nghe Podcast về hành trình Vị Nữ"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/15 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+                    <span className="text-sm animate-pulse group-hover:animate-bounce relative z-10">
+                      🎙️
+                    </span>
+                    <span className="text-xs font-extrabold relative z-10 tracking-wide">
+                      PODCAST
+                    </span>
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg blur opacity-20 group-hover:opacity-40 transition-opacity duration-200 -z-10"></div>
+                  </button>
+
+                  <button
+                    onClick={() => setAiChatOpen(true)}
+                    className="group relative bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600 hover:from-cyan-300 hover:via-blue-400 hover:to-purple-500 transition-all duration-300 text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-xs font-bold focus:outline-none cursor-pointer min-w-[50px] sm:min-w-[70px] flex flex-col items-center justify-center gap-0.5 hover:scale-105 active:scale-95 shadow-md hover:shadow-lg transform-gpu flex-shrink-0 border border-white/20 hover:border-white/40"
+                    title="Trò chuyện với AI về Vị Nữ"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/15 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+                    <span className="text-sm animate-spin group-hover:animate-pulse relative z-10">
+                      🤖
+                    </span>
+                    <span className="text-xs font-extrabold relative z-10 tracking-wide">
+                      AI
+                    </span>
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-lg blur opacity-20 group-hover:opacity-40 transition-opacity duration-200 -z-10"></div>
+                  </button>
+
+                  <a
+                    href="https://www.facebook.com/profile.php?id=61581248485989"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 hover:from-blue-400 hover:via-blue-500 hover:to-blue-600 transition-all duration-300 text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-xs font-bold focus:outline-none cursor-pointer min-w-[50px] sm:min-w-[70px] flex flex-col items-center justify-center gap-0.5 hover:scale-105 active:scale-95 shadow-md hover:shadow-lg transform-gpu flex-shrink-0 border border-white/20 hover:border-white/40"
+                    title="Theo dõi Facebook - Cập nhật nội dung mới"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/15 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+                    <FontAwesomeIcon
+                      icon={faFacebook}
+                      className="text-sm animate-pulse group-hover:animate-bounce relative z-10"
+                    />
+                    <span className="text-xs font-extrabold relative z-10 tracking-wide">
+                      FB
+                    </span>
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg blur opacity-20 group-hover:opacity-40 transition-opacity duration-200 -z-10"></div>
+                  </a>
+
+                  <a
+                    href="https://www.tiktok.com/@chandungvinu"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative bg-gradient-to-br from-pink-500 via-red-500 to-black hover:from-pink-400 hover:via-red-400 hover:to-gray-800 transition-all duration-300 text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-xs font-bold focus:outline-none cursor-pointer min-w-[50px] sm:min-w-[70px] flex flex-col items-center justify-center gap-0.5 hover:scale-105 active:scale-95 shadow-md hover:shadow-lg transform-gpu flex-shrink-0 border border-white/20 hover:border-white/40"
+                    title="Theo dõi TikTok - Video thú vị về Vị Nữ"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/15 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+                    <FontAwesomeIcon
+                      icon={faTiktok}
+                      className="text-sm animate-bounce group-hover:animate-pulse relative z-10"
+                    />
+                    <span className="text-xs font-extrabold relative z-10 tracking-wide">
+                      TIKTOK
+                    </span>
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-black rounded-lg blur opacity-20 group-hover:opacity-40 transition-opacity duration-200 -z-10"></div>
+                  </a>
+                </div>
+
+                {/* Static toggle button */}
+                <div className="pointer-events-auto flex-shrink-0">
+                  <StaticToggleButton />
+                </div>
               </div>
             </div>
 
-            <div className="flex items-center gap-1 sm:gap-2 md:gap-3">
-              {/* QUIZ, Podcast, AI, Facebook, TikTok buttons - all in one group */}
-              <div className="pointer-events-auto flex-shrink-0 bg-black/40 backdrop-blur-md rounded-full border border-white/30 p-1 flex items-center gap-0.5 sm:gap-1 overflow-x-auto scrollbar-hide">
-                <button
-                  onClick={() => setQuizOpen(true)}
-                  className="bg-[#6256ca] hover:bg-purple-700 transition-colors text-white px-1.5 py-1 sm:px-3 sm:py-2 rounded-full text-xs sm:text-sm focus:outline-none cursor-pointer min-w-[32px] sm:min-w-[80px] flex items-center justify-center gap-0.5 sm:gap-1 hover:scale-105 active:scale-95 shadow-lg flex-shrink-0"
-                  title="Trắc nghiệm"
-                >
-                  <span className="animate-pulse text-xs sm:text-sm">❓</span>
-                  <span className="hidden sm:inline text-xs">QUIZ</span>
-                </button>
-                <button
-                  onClick={() => setPodcastOpen(true)}
-                  className="bg-[#6256ca] hover:bg-purple-700 transition-colors text-white px-1.5 py-1 sm:px-3 sm:py-2 rounded-full text-xs sm:text-sm focus:outline-none cursor-pointer min-w-[32px] sm:min-w-[80px] flex items-center justify-center gap-0.5 sm:gap-1 hover:scale-105 active:scale-95 shadow-lg flex-shrink-0"
-                  title="Podcast"
-                >
-                  <span className="animate-bounce text-xs sm:text-sm">🎙️</span>
-                  <span className="hidden sm:inline text-xs">PODCAST</span>
-                </button>
-                <button
-                  onClick={() => setAiChatOpen(true)}
-                  className="bg-[#6256ca] hover:bg-purple-700 transition-colors text-white px-1.5 py-1 sm:px-3 sm:py-2 rounded-full text-xs sm:text-sm focus:outline-none cursor-pointer min-w-[32px] sm:min-w-[80px] flex items-center justify-center gap-0.5 sm:gap-1 hover:scale-105 active:scale-95 shadow-lg flex-shrink-0"
-                  title="Trợ lý AI"
-                >
-                  <span className="animate-spin text-xs sm:text-sm">🤖</span>
-                  <span className="hidden sm:inline text-xs">AI</span>
-                </button>
-                <a
-                  href="https://www.facebook.com/profile.php?id=61581248485989"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-blue-600 hover:bg-blue-700 transition-all duration-300 text-white px-1.5 py-1 sm:px-3 sm:py-2 rounded-full text-xs sm:text-sm focus:outline-none cursor-pointer min-w-[32px] flex items-center justify-center hover:scale-110 active:scale-95 shadow-lg flex-shrink-0"
-                  title="Theo dõi Facebook"
-                >
-                  <FontAwesomeIcon
-                    icon={faFacebook}
-                    className="text-sm sm:text-lg"
-                  />
-                </a>
-                <a
-                  href="https://www.tiktok.com/@chandungvinu"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-black hover:bg-gray-800 transition-all duration-300 text-white px-1.5 py-1 sm:px-3 sm:py-2 rounded-full text-xs sm:text-sm focus:outline-none cursor-pointer min-w-[32px] flex items-center justify-center hover:scale-110 active:scale-95 shadow-lg flex-shrink-0"
-                  title="Theo dõi TikTok"
-                >
-                  <FontAwesomeIcon
-                    icon={faTiktok}
-                    className="text-sm sm:text-lg"
-                  />
-                </a>
+            {/* Mobile layout: Logo and buttons in header area */}
+            <div className="lg:hidden flex flex-col gap-2">
+              {/* Logo */}
+              <div className="pointer-events-auto flex-shrink-0">
+                <div className="bg-[#6256ca] backdrop-blur-sm rounded-lg px-2 py-1 sm:px-3 sm:py-2 border border-white/20">
+                  <h1 className="text-white font-bold text-xs sm:text-sm md:text-base leading-tight">
+                    VỊ NỮ
+                  </h1>
+                  <p className="text-white text-xs leading-tight">
+                    Hành trình khẳng định bản thân
+                  </p>
+                </div>
               </div>
 
-              {/* Static toggle button */}
-              <div className="pointer-events-auto flex-shrink-0">
+              {/* Action buttons directly under logo */}
+              <div className="pointer-events-auto bg-gradient-to-r from-purple-900/70 via-pink-900/70 to-purple-900/70 backdrop-blur-xl rounded-xl border border-purple-400/40 shadow-xl p-2 overflow-x-auto scrollbar-hide">
+                <div className="flex items-center gap-2 min-w-max">
+                  {/* Mobile Quiz Button */}
+                  <button
+                    onClick={() => setQuizOpen(true)}
+                    className="group relative bg-gradient-to-br from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 transition-all duration-300 text-white px-3 py-2 rounded-lg text-xs font-bold focus:outline-none cursor-pointer min-w-[70px] flex flex-col items-center justify-center gap-0.5 hover:scale-105 active:scale-95 shadow-md hover:shadow-lg transform-gpu flex-shrink-0 border border-white/20 hover:border-white/40"
+                    title="Trắc nghiệm kiến thức về Vị Nữ"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/15 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+                    <span className="text-sm animate-bounce group-hover:animate-pulse relative z-10">
+                      🧠
+                    </span>
+                    <span className="text-xs font-extrabold relative z-10 tracking-wide">
+                      QUIZ
+                    </span>
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-yellow-400 to-red-400 rounded-lg blur opacity-20 group-hover:opacity-40 transition-opacity duration-200 -z-10"></div>
+                  </button>
+
+                  {/* Mobile Podcast Button */}
+                  <button
+                    onClick={() => setPodcastOpen(true)}
+                    className="group relative bg-gradient-to-br from-purple-500 via-pink-500 to-purple-600 hover:from-purple-400 hover:via-pink-400 hover:to-purple-500 transition-all duration-300 text-white px-3 py-2 rounded-lg text-xs font-bold focus:outline-none cursor-pointer min-w-[70px] flex flex-col items-center justify-center gap-0.5 hover:scale-105 active:scale-95 shadow-md hover:shadow-lg transform-gpu flex-shrink-0 border border-white/20 hover:border-white/40"
+                    title="Nghe Podcast về hành trình Vị Nữ"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/15 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+                    <span className="text-sm animate-pulse group-hover:animate-bounce relative z-10">
+                      🎙️
+                    </span>
+                    <span className="text-xs font-extrabold relative z-10 tracking-wide">
+                      PODCAST
+                    </span>
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg blur opacity-20 group-hover:opacity-40 transition-opacity duration-200 -z-10"></div>
+                  </button>
+
+                  {/* Mobile AI Button */}
+                  <button
+                    onClick={() => setAiChatOpen(true)}
+                    className="group relative bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600 hover:from-cyan-300 hover:via-blue-400 hover:to-purple-500 transition-all duration-300 text-white px-3 py-2 rounded-lg text-xs font-bold focus:outline-none cursor-pointer min-w-[70px] flex flex-col items-center justify-center gap-0.5 hover:scale-105 active:scale-95 shadow-md hover:shadow-lg transform-gpu flex-shrink-0 border border-white/20 hover:border-white/40"
+                    title="Trò chuyện với AI về Vị Nữ"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/15 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+                    <span className="text-sm animate-spin group-hover:animate-pulse relative z-10">
+                      🤖
+                    </span>
+                    <span className="text-xs font-extrabold relative z-10 tracking-wide">
+                      AI
+                    </span>
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-lg blur opacity-20 group-hover:opacity-40 transition-opacity duration-200 -z-10"></div>
+                  </button>
+
+                  {/* Mobile Facebook Button */}
+                  <a
+                    href="https://www.facebook.com/profile.php?id=61581248485989"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 hover:from-blue-400 hover:via-blue-500 hover:to-blue-600 transition-all duration-300 text-white px-3 py-2 rounded-lg text-xs font-bold focus:outline-none cursor-pointer min-w-[70px] flex flex-col items-center justify-center gap-0.5 hover:scale-105 active:scale-95 shadow-md hover:shadow-lg transform-gpu flex-shrink-0 border border-white/20 hover:border-white/40"
+                    title="Theo dõi Facebook - Cập nhật nội dung mới"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/15 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+                    <FontAwesomeIcon
+                      icon={faFacebook}
+                      className="text-sm animate-pulse group-hover:animate-bounce relative z-10"
+                    />
+                    <span className="text-xs font-extrabold relative z-10 tracking-wide">
+                      FB
+                    </span>
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg blur opacity-20 group-hover:opacity-40 transition-opacity duration-200 -z-10"></div>
+                  </a>
+
+                  {/* Mobile TikTok Button */}
+                  <a
+                    href="https://www.tiktok.com/@chandungvinu"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative bg-gradient-to-br from-pink-500 via-red-500 to-black hover:from-pink-400 hover:via-red-400 hover:to-gray-800 transition-all duration-300 text-white px-3 py-2 rounded-lg text-xs font-bold focus:outline-none cursor-pointer min-w-[70px] flex flex-col items-center justify-center gap-0.5 hover:scale-105 active:scale-95 shadow-md hover:shadow-lg transform-gpu flex-shrink-0 border border-white/20 hover:border-white/40"
+                    title="Theo dõi TikTok - Video thú vị về Vị Nữ"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/15 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+                    <FontAwesomeIcon
+                      icon={faTiktok}
+                      className="text-sm animate-bounce group-hover:animate-pulse relative z-10"
+                    />
+                    <span className="text-xs font-extrabold relative z-10 tracking-wide">
+                      TIKTOK
+                    </span>
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-black rounded-lg blur opacity-20 group-hover:opacity-40 transition-opacity duration-200 -z-10"></div>
+                  </a>
+                </div>
+              </div>
+
+              {/* Mobile: Book control button */}
+              <div className="pointer-events-auto flex justify-center">
                 <StaticToggleButton />
               </div>
             </div>
           </div>
+
+          {/* Remove the old mobile section that was in the middle */}
 
           {/* Bottom navigation - improved responsive */}
           <div className="w-full pointer-events-auto relative z-60">

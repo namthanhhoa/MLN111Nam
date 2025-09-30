@@ -1,7 +1,7 @@
 import { atom, useAtom } from "jotai";
 import { useEffect, useState } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook, faTiktok } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebook, faTiktok } from "@fortawesome/free-brands-svg-icons";
 import AIChat from "./AIChat.jsx";
 import Podcast from "./Podcast.jsx";
 import Quiz from "./Quiz.jsx";
@@ -41,10 +41,10 @@ const pageContents = {
       {
         content:
           "“Vị nữ” không chỉ còn là biểu tượng đấu tranh để giành quyền lợi, mà ngày nay đã trở thành sự tôn vinh bản thể, hương vị và giá trị riêng của phụ nữ. Đó là sự đa dạng trong lựa chọn và cách sống: có người chọn gia đình, có người theo đuổi sự nghiệp; có người mạnh mẽ, có người dịu dàng. Mọi sự lựa chọn ấy đều đáng được công nhận và trân trọng, vì chúng góp phần khẳng định vai trò thiết yếu của phụ nữ trong tiến bộ và nhân văn.\n" +
-            "\n" +
-            "Simone de Beauvoir từng nói: “Phụ nữ không sinh ra là phụ nữ, họ trở thành phụ nữ.” Câu nói này nhắc nhở rằng “nữ tính” không phải là bản chất có sẵn, mà được hình thành qua giáo dục, văn hóa, xã hội và quyết định cá nhân. Người phụ nữ có quyền và khả năng định hình chính mình, phá bỏ những ràng buộc đã tồn tại qua nhiều thế kỷ, để sống đúng với bản ngã và giá trị riêng.\n" +
-            "\n" +
-            "Những trang viết về “vị nữ” chính là lời khẳng định: phụ nữ hôm nay không chỉ dừng lại ở việc chống bất công, mà còn mở ra không gian để hiện diện với đầy đủ nhân phẩm và tự do. Đó là hành trình khẳng định giá trị, vừa kế thừa tiếng nói đấu tranh, vừa lan tỏa cảm hứng sống đúng với bản thân, trở thành một phần tất yếu của sự tiến bộ và nhân văn trong xã hội.",
+          "\n" +
+          "Simone de Beauvoir từng nói: “Phụ nữ không sinh ra là phụ nữ, họ trở thành phụ nữ.” Câu nói này nhắc nhở rằng “nữ tính” không phải là bản chất có sẵn, mà được hình thành qua giáo dục, văn hóa, xã hội và quyết định cá nhân. Người phụ nữ có quyền và khả năng định hình chính mình, phá bỏ những ràng buộc đã tồn tại qua nhiều thế kỷ, để sống đúng với bản ngã và giá trị riêng.\n" +
+          "\n" +
+          "Những trang viết về “vị nữ” chính là lời khẳng định: phụ nữ hôm nay không chỉ dừng lại ở việc chống bất công, mà còn mở ra không gian để hiện diện với đầy đủ nhân phẩm và tự do. Đó là hành trình khẳng định giá trị, vừa kế thừa tiếng nói đấu tranh, vừa lan tỏa cảm hứng sống đúng với bản thân, trở thành một phần tất yếu của sự tiến bộ và nhân văn trong xã hội.",
       },
     ],
   },
@@ -54,14 +54,14 @@ const pageContents = {
       {
         content:
           "Xã hội từ lâu gán cho phụ nữ những khuôn mẫu như “ngoan hiền, hy sinh, giỏi nội trợ”, coi đó là chuẩn mực tất yếu.\n" +
-            "\n" +
-            "Những định kiến này lặp đi lặp lại qua giáo dục, văn hóa, lời khen – chê thường ngày, biến thành chiếc “lồng vô hình” không song sắt, không khóa nhưng lại giam giữ phụ nữ trong vai trò cố định.\n" +
-            "\n" +
-            "Điều đó giới hạn tự do, triệt tiêu tiềm năng, ước mơ, khát vọng của phụ nữ.\n" +
-            "\n" +
-            "Khi các chuẩn mực này trở thành thước đo đạo đức và phẩm hạnh, phụ nữ ít cơ hội khẳng định bản thân, còn những giá trị khác như trí tuệ, sáng tạo, lãnh đạo lại bị xem nhẹ.\n" +
-            "\n" +
-            "👉 Định kiến giống như một nhà tù vô hình, ngăn phụ nữ bước ra khỏi những vai trò được định sẵn.",
+          "\n" +
+          "Những định kiến này lặp đi lặp lại qua giáo dục, văn hóa, lời khen – chê thường ngày, biến thành chiếc “lồng vô hình” không song sắt, không khóa nhưng lại giam giữ phụ nữ trong vai trò cố định.\n" +
+          "\n" +
+          "Điều đó giới hạn tự do, triệt tiêu tiềm năng, ước mơ, khát vọng của phụ nữ.\n" +
+          "\n" +
+          "Khi các chuẩn mực này trở thành thước đo đạo đức và phẩm hạnh, phụ nữ ít cơ hội khẳng định bản thân, còn những giá trị khác như trí tuệ, sáng tạo, lãnh đạo lại bị xem nhẹ.\n" +
+          "\n" +
+          "👉 Định kiến giống như một nhà tù vô hình, ngăn phụ nữ bước ra khỏi những vai trò được định sẵn.",
       },
     ],
   },
@@ -71,14 +71,14 @@ const pageContents = {
       {
         content:
           "Simone de Beauvoir: Khẳng định cái “Tôi”\n" +
-            "\n" +
-            "Beauvoir cho rằng con người không bị định nghĩa bởi bản chất sinh học mà bởi hành động và lựa chọn. Với phụ nữ, điều này có ý nghĩa đặc biệt: họ không nên chấp nhận bị xã hội đóng khung vào vai trò “Người Khác”, mà phải tự ý thức về sự tồn tại của mình để bước ra khỏi giới hạn.\n" +
-            "Triết lý hiện sinh của bà khẳng định nữ quyền không chỉ là đòi quyền lợi, mà là hành trình ý thức – tự lựa chọn – tự chịu trách nhiệm. Phụ nữ phải giành quyền trở thành chính mình, sống đúng với bản ngã, từ đó khẳng định bình đẳng và nhân phẩm.\n" +
-            "\n" +
-            "Marx & Engels: Giải phóng khỏi áp bức kinh tế\n" +
-            "\n" +
-            "Theo Marx và Engels, sự áp bức phụ nữ bắt nguồn từ chế độ tư hữu và vai trò phụ thuộc trong sản xuất. Gia đình trở thành “nhà máy tư nhân”, giam hãm phụ nữ trong công việc nội trợ.\n" +
-            "Engels nhấn mạnh: chỉ khi phụ nữ được tham gia lao động xã hội bình đẳng với nam giới, họ mới có thể tự do, tự quyết định cuộc sống của mình. Giải phóng kinh tế là điều kiện tiên quyết để phá bỏ định kiến, khẳng định vị thế bình đẳng trong xã hội.",
+          "\n" +
+          "Beauvoir cho rằng con người không bị định nghĩa bởi bản chất sinh học mà bởi hành động và lựa chọn. Với phụ nữ, điều này có ý nghĩa đặc biệt: họ không nên chấp nhận bị xã hội đóng khung vào vai trò “Người Khác”, mà phải tự ý thức về sự tồn tại của mình để bước ra khỏi giới hạn.\n" +
+          "Triết lý hiện sinh của bà khẳng định nữ quyền không chỉ là đòi quyền lợi, mà là hành trình ý thức – tự lựa chọn – tự chịu trách nhiệm. Phụ nữ phải giành quyền trở thành chính mình, sống đúng với bản ngã, từ đó khẳng định bình đẳng và nhân phẩm.\n" +
+          "\n" +
+          "Marx & Engels: Giải phóng khỏi áp bức kinh tế\n" +
+          "\n" +
+          "Theo Marx và Engels, sự áp bức phụ nữ bắt nguồn từ chế độ tư hữu và vai trò phụ thuộc trong sản xuất. Gia đình trở thành “nhà máy tư nhân”, giam hãm phụ nữ trong công việc nội trợ.\n" +
+          "Engels nhấn mạnh: chỉ khi phụ nữ được tham gia lao động xã hội bình đẳng với nam giới, họ mới có thể tự do, tự quyết định cuộc sống của mình. Giải phóng kinh tế là điều kiện tiên quyết để phá bỏ định kiến, khẳng định vị thế bình đẳng trong xã hội.",
       },
     ],
   },
@@ -88,12 +88,12 @@ const pageContents = {
       {
         content:
           "Đối thoại giữa các luồng tư tưởng\n" +
-            "\n" +
-            "Simone de Beauvoir khẳng định phụ nữ không nên chấp nhận vai trò bị xã hội áp đặt, mà phải tự ý thức về sự tồn tại của mình. Việc “trở thành phụ nữ” không phải là thuận theo những khuôn mẫu dựng sẵn (làm vợ, làm mẹ, làm “người phụ nữ ngoan hiền”), mà là hành trình phản kháng, vượt thoát và khẳng định bản ngã tự do. Nữ quyền, theo Beauvoir, là sự lựa chọn và tự chịu trách nhiệm của chính phụ nữ.\n" +
-            "\n" +
-            "Gen Z và cuộc đối thoại mới\n" +
-            "\n" +
-            "Trong xã hội hiện đại, Gen Z đang đặt lại nhiều câu hỏi về bình đẳng giới trong đời sống hằng ngày. Họ không nhìn việc “ai trả tiền khi hẹn hò” hay “nội trợ là trách nhiệm của phụ nữ” như chuẩn mực, mà coi đó là sự chia sẻ, linh hoạt và đồng thuận. Gen Z hướng đến sự tôn trọng khác biệt, đối thoại chân thành thay vì cực đoan, qua đó khẳng định lao động nội trợ cũng có giá trị và cần được công nhận bình đẳng trong gia đình.",
+          "\n" +
+          "Simone de Beauvoir khẳng định phụ nữ không nên chấp nhận vai trò bị xã hội áp đặt, mà phải tự ý thức về sự tồn tại của mình. Việc “trở thành phụ nữ” không phải là thuận theo những khuôn mẫu dựng sẵn (làm vợ, làm mẹ, làm “người phụ nữ ngoan hiền”), mà là hành trình phản kháng, vượt thoát và khẳng định bản ngã tự do. Nữ quyền, theo Beauvoir, là sự lựa chọn và tự chịu trách nhiệm của chính phụ nữ.\n" +
+          "\n" +
+          "Gen Z và cuộc đối thoại mới\n" +
+          "\n" +
+          "Trong xã hội hiện đại, Gen Z đang đặt lại nhiều câu hỏi về bình đẳng giới trong đời sống hằng ngày. Họ không nhìn việc “ai trả tiền khi hẹn hò” hay “nội trợ là trách nhiệm của phụ nữ” như chuẩn mực, mà coi đó là sự chia sẻ, linh hoạt và đồng thuận. Gen Z hướng đến sự tôn trọng khác biệt, đối thoại chân thành thay vì cực đoan, qua đó khẳng định lao động nội trợ cũng có giá trị và cần được công nhận bình đẳng trong gia đình.",
       },
     ],
   },
@@ -103,24 +103,24 @@ const pageContents = {
       {
         content:
           "Nữ quyền tích cực\n" +
-            "\n" +
-            "Bình đẳng cơ hội: Mọi giới tính đều có quyền tiếp cận giáo dục, nghề nghiệp và cơ hội thăng tiến.\n" +
-            "\n" +
-            "Quyền tự quyết: Phụ nữ được lựa chọn con đường sống, sự nghiệp, hôn nhân theo ý chí riêng.\n" +
-            "\n" +
-            "Tôn trọng sự khác biệt: Không áp đặt chuẩn mực chung, thừa nhận đa dạng lựa chọn và trải nghiệm.\n" +
-            "\n" +
-            "Tinh thần hợp tác: Không phủ định nam giới, mà khuyến khích sự đồng hành và hỗ trợ lẫn nhau.\n" +
-            "\n" +
-            "Nữ quyền độc hại\n" +
-            "\n" +
-            "Biến bình đẳng thành đặc quyền: Chỉ đòi lợi ích riêng cho phụ nữ, bỏ qua công bằng toàn thể.\n" +
-            "\n" +
-            "Phủ nhận giới khác: Nhìn nam giới như “kẻ đối lập”, tạo mâu thuẫn thay vì hợp tác.\n" +
-            "\n" +
-            "Cực đoan hóa thông điệp: Áp đặt, công kích, sử dụng ngôn ngữ hằn học, gây chia rẽ xã hội.\n" +
-            "\n" +
-            "Mất tính đối thoại: Không còn tinh thần trao đổi, đối thoại để hiểu nhau, mà tạo khoảng cách.",
+          "\n" +
+          "Bình đẳng cơ hội: Mọi giới tính đều có quyền tiếp cận giáo dục, nghề nghiệp và cơ hội thăng tiến.\n" +
+          "\n" +
+          "Quyền tự quyết: Phụ nữ được lựa chọn con đường sống, sự nghiệp, hôn nhân theo ý chí riêng.\n" +
+          "\n" +
+          "Tôn trọng sự khác biệt: Không áp đặt chuẩn mực chung, thừa nhận đa dạng lựa chọn và trải nghiệm.\n" +
+          "\n" +
+          "Tinh thần hợp tác: Không phủ định nam giới, mà khuyến khích sự đồng hành và hỗ trợ lẫn nhau.\n" +
+          "\n" +
+          "Nữ quyền độc hại\n" +
+          "\n" +
+          "Biến bình đẳng thành đặc quyền: Chỉ đòi lợi ích riêng cho phụ nữ, bỏ qua công bằng toàn thể.\n" +
+          "\n" +
+          "Phủ nhận giới khác: Nhìn nam giới như “kẻ đối lập”, tạo mâu thuẫn thay vì hợp tác.\n" +
+          "\n" +
+          "Cực đoan hóa thông điệp: Áp đặt, công kích, sử dụng ngôn ngữ hằn học, gây chia rẽ xã hội.\n" +
+          "\n" +
+          "Mất tính đối thoại: Không còn tinh thần trao đổi, đối thoại để hiểu nhau, mà tạo khoảng cách.",
       },
     ],
   },
@@ -184,9 +184,12 @@ const PageContent = ({ pageNumber, isOpen }) => {
           <div className="w-12 h-1 bg-white/30 rounded-full"></div>
         </div>
 
-        {/* Scrollable content area */}
-        <div className="flex-1 overflow-y-auto scrollbar-hide">
-          <div className="text-white p-4 pb-6">
+        {/* Scrollable content area - improved scrolling */}
+        <div
+          className="flex-1 overflow-y-auto scrollbar-hide mobile-scroll-container"
+          style={{ WebkitOverflowScrolling: "touch" }}
+        >
+          <div className="text-white p-4 pb-6 min-h-full">
             <h2 className="text-xl sm:text-2xl font-bold mb-3 break-words leading-tight">
               {content.title}
             </h2>
@@ -202,17 +205,21 @@ const PageContent = ({ pageNumber, isOpen }) => {
                 }}
               />
             )}
-            <p className="text-sm sm:text-base leading-relaxed break-words whitespace-pre-line">
-              {currentContent?.content ||
-                content.sections?.[0]?.content ||
-                "Không có nội dung"}
-            </p>
+            <div className="prose prose-invert max-w-none">
+              <p className="text-sm sm:text-base leading-relaxed break-words whitespace-pre-line text-white/90">
+                {currentContent?.content ||
+                  content.sections?.[0]?.content ||
+                  "Không có nội dung"}
+              </p>
+            </div>
+            {/* Thêm padding bottom để đảm bảo có thể cuộn hết nội dung */}
+            <div className="h-20"></div>
           </div>
         </div>
 
         {/* Fixed navigation buttons */}
         {sections.length > 1 && (
-          <div className="flex justify-between items-center p-3 gap-2 bg-gradient-to-t from-black/90 to-transparent border-t border-white/10">
+          <div className="flex justify-between items-center p-3 gap-2 bg-gradient-to-t from-black/90 to-transparent border-t border-white/10 flex-shrink-0">
             <button
               className={`px-3 py-2 rounded-lg text-xs sm:text-sm transition-all duration-300 flex-1 max-w-[120px] bg-gradient-to-r from-[#6256ca] to-[#ffffff] text-[#6256ca] font-semibold hover:from-[#6256ca] hover:to-[#e0e0ff] disabled:opacity-50`}
               onClick={() => {
@@ -246,18 +253,18 @@ const PageContent = ({ pageNumber, isOpen }) => {
     );
   }
 
-  // Desktop layout: content ở bên trái
+  // Desktop layout: content ở bên trái - improved scrolling
   return (
     <div className="fixed left-0 top-0 h-full w-[35vw] min-w-[350px] max-w-[500px] bg-gradient-to-r from-black/90 to-black/30 backdrop-blur-md z-50 pointer-events-none flex flex-col border-r border-purple-500/20">
-      <div className="text-white max-w-full pointer-events-auto w-full flex-1 flex flex-col p-6 lg:p-8">
-        <h2 className="text-2xl lg:text-3xl xl:text-4xl font-bold mb-4 lg:mb-6 text-left break-words leading-tight">
+      <div className="text-white max-w-full pointer-events-auto w-full flex-1 flex flex-col p-6 lg:p-8 overflow-hidden">
+        <h2 className="text-2xl lg:text-3xl xl:text-4xl font-bold mb-4 lg:mb-6 text-left break-words leading-tight flex-shrink-0">
           {content.title}
         </h2>
         {currentContent?.image && (
           <img
             src={currentContent.image}
             alt="Minh hoạ"
-            className="w-full max-h-48 lg:max-h-64 object-contain rounded-lg mb-4 bg-white/5"
+            className="w-full max-h-48 lg:max-h-64 object-contain rounded-lg mb-4 bg-white/5 flex-shrink-0"
             onError={(e) => {
               e.currentTarget.onerror = null;
               e.currentTarget.src =
@@ -265,15 +272,24 @@ const PageContent = ({ pageNumber, isOpen }) => {
             }}
           />
         )}
-        <div className="flex-1 overflow-y-auto scrollbar-hide">
-          <p className="text-base lg:text-lg leading-relaxed text-left break-words whitespace-pre-line">
-            {currentContent.content}
-          </p>
+
+        {/* Improved scrollable content area */}
+        <div
+          className="flex-1 overflow-y-auto scrollbar-hide pr-2"
+          style={{ scrollBehavior: "smooth" }}
+        >
+          <div className="prose prose-invert max-w-none">
+            <p className="text-base lg:text-lg leading-relaxed text-left break-words whitespace-pre-line text-white/90 mb-6">
+              {currentContent.content}
+            </p>
+          </div>
+          {/* Padding bottom để đảm bảo cuộn hết nội dung */}
+          <div className="h-8"></div>
         </div>
 
-        {/* Nút chuyển đổi phần */}
+        {/* Navigation buttons - fixed at bottom */}
         {sections.length > 1 && (
-          <div className="flex justif   y-between items-center mt-4 lg:mt-6 gap-4 relative z-60 pt-4 border-t border-white/10">
+          <div className="flex justify-between items-center mt-4 lg:mt-6 gap-4 relative z-60 pt-4 border-t border-white/10 flex-shrink-0">
             <button
               className={`px-4 py-2 rounded-lg text-sm transition-all duration-300 pointer-events-auto cursor-pointer relative z-70 ${
                 hasPrevSection
@@ -437,7 +453,10 @@ export const UI = () => {
     <>
       {/* Cute Feminine Loading Screen */}
       {initialLoading && (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden" style={{ backgroundColor: '#EAF0FE' }}>
+        <div
+          className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden"
+          style={{ backgroundColor: "#EAF0FE" }}
+        >
           {/* Floating hearts background */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             {[...Array(20)].map((_, i) => (
@@ -450,7 +469,7 @@ export const UI = () => {
                   fontSize: `${Math.random() * 20 + 10}px`,
                   animationDelay: `${Math.random() * 3}s`,
                   animationDuration: `${Math.random() * 2 + 2}s`,
-                  color: '#B3A8DA'
+                  color: "#B3A8DA",
                 }}
               >
                 💖
@@ -466,7 +485,7 @@ export const UI = () => {
                   fontSize: `${Math.random() * 15 + 8}px`,
                   animationDelay: `${Math.random() * 2}s`,
                   animationDuration: `${Math.random() * 1.5 + 1}s`,
-                  color: '#B3A8DA'
+                  color: "#B3A8DA",
                 }}
               >
                 ✨
@@ -480,9 +499,11 @@ export const UI = () => {
                   left: `${Math.random() * 100}%`,
                   top: `${Math.random() * 100}%`,
                   fontSize: `${Math.random() * 12 + 6}px`,
-                  animation: `float ${Math.random() * 3 + 2}s ease-in-out infinite`,
+                  animation: `float ${
+                    Math.random() * 3 + 2
+                  }s ease-in-out infinite`,
                   animationDelay: `${Math.random() * 2}s`,
-                  color: '#B3A8DA'
+                  color: "#B3A8DA",
                 }}
               >
                 🌸
@@ -494,10 +515,16 @@ export const UI = () => {
           <div className="text-center z-10 px-6">
             {/* Logo with cute animation */}
             <div className="mb-8 transform hover:scale-110 transition-transform duration-500">
-              <div className="text-4xl sm:text-5xl md:text-6xl font-bold mb-2 animate-pulse" style={{ color: '#B3A8DA' }}>
+              <div
+                className="text-4xl sm:text-5xl md:text-6xl font-bold mb-2 animate-pulse"
+                style={{ color: "#B3A8DA" }}
+              >
                 VỊ NỮ
               </div>
-              <div className="text-sm sm:text-base md:text-lg font-medium" style={{ color: '#B3A8DA' }}>
+              <div
+                className="text-sm sm:text-base md:text-lg font-medium"
+                style={{ color: "#B3A8DA" }}
+              >
                 Hành trình khẳng định bản thân ✨
               </div>
             </div>
@@ -505,9 +532,27 @@ export const UI = () => {
             {/* Cute loading spinner */}
             <div className="mb-6 relative">
               <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto relative">
-                <div className="absolute inset-0 border-4 rounded-full animate-spin" style={{ borderColor: '#B3A8DA', borderTopColor: 'transparent' }}></div>
-                <div className="absolute inset-2 border-3 rounded-full animate-spin animation-delay-150" style={{ borderColor: '#B3A8DA', borderRightColor: 'transparent' }}></div>
-                <div className="absolute inset-4 border-2 rounded-full animate-spin animation-delay-300" style={{ borderColor: '#B3A8DA', borderBottomColor: 'transparent' }}></div>
+                <div
+                  className="absolute inset-0 border-4 rounded-full animate-spin"
+                  style={{
+                    borderColor: "#B3A8DA",
+                    borderTopColor: "transparent",
+                  }}
+                ></div>
+                <div
+                  className="absolute inset-2 border-3 rounded-full animate-spin animation-delay-150"
+                  style={{
+                    borderColor: "#B3A8DA",
+                    borderRightColor: "transparent",
+                  }}
+                ></div>
+                <div
+                  className="absolute inset-4 border-2 rounded-full animate-spin animation-delay-300"
+                  style={{
+                    borderColor: "#B3A8DA",
+                    borderBottomColor: "transparent",
+                  }}
+                ></div>
                 <div className="absolute inset-0 flex items-center justify-center text-2xl animate-bounce">
                   💫
                 </div>
@@ -516,48 +561,92 @@ export const UI = () => {
 
             {/* Progress bar */}
             <div className="w-64 sm:w-80 mx-auto mb-4">
-              <div className="bg-white/50 rounded-full h-3 sm:h-4 overflow-hidden shadow-inner" style={{ borderColor: '#B3A8DA', borderWidth: '1px' }}>
+              <div
+                className="bg-white/50 rounded-full h-3 sm:h-4 overflow-hidden shadow-inner"
+                style={{ borderColor: "#B3A8DA", borderWidth: "1px" }}
+              >
                 <div
                   className="h-full rounded-full transition-all duration-300 ease-out shadow-sm relative overflow-hidden"
                   style={{
                     width: `${Math.min(loadingProgress, 100)}%`,
-                    backgroundColor: '#B3A8DA'
+                    backgroundColor: "#B3A8DA",
                   }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse"></div>
                 </div>
               </div>
-              <div className="text-center mt-2 text-sm sm:text-base font-medium" style={{ color: '#B3A8DA' }}>
+              <div
+                className="text-center mt-2 text-sm sm:text-base font-medium"
+                style={{ color: "#B3A8DA" }}
+              >
                 {Math.round(loadingProgress)}% ✨
               </div>
             </div>
 
             {/* Loading messages */}
-            <div className="text-sm sm:text-base font-medium animate-pulse" style={{ color: '#B3A8DA' }}>
+            <div
+              className="text-sm sm:text-base font-medium animate-pulse"
+              style={{ color: "#B3A8DA" }}
+            >
               {loadingProgress < 30 && "Đang chuẩn bị hành trình... 🌸"}
-              {loadingProgress >= 30 && loadingProgress < 60 && "Khám phá giá trị bản thân... 💖"}
-              {loadingProgress >= 60 && loadingProgress < 90 && "Gần hoàn thành rồi... ✨"}
+              {loadingProgress >= 30 &&
+                loadingProgress < 60 &&
+                "Khám phá giá trị bản thân... 💖"}
+              {loadingProgress >= 60 &&
+                loadingProgress < 90 &&
+                "Gần hoàn thành rồi... ✨"}
               {loadingProgress >= 90 && "Chào mừng bạn đến với VỊ NỮ! 🎉"}
             </div>
 
             {/* Cute decorative elements */}
             <div className="mt-8 flex justify-center space-x-4 text-2xl sm:text-3xl">
-              <span className="animate-bounce animation-delay-0" style={{ color: '#B3A8DA' }}>🌸</span>
-              <span className="animate-bounce animation-delay-150" style={{ color: '#B3A8DA' }}>💖</span>
-              <span className="animate-bounce animation-delay-300" style={{ color: '#B3A8DA' }}>✨</span>
-              <span className="animate-bounce animation-delay-450" style={{ color: '#B3A8DA' }}>🌸</span>
+              <span
+                className="animate-bounce animation-delay-0"
+                style={{ color: "#B3A8DA" }}
+              >
+                🌸
+              </span>
+              <span
+                className="animate-bounce animation-delay-150"
+                style={{ color: "#B3A8DA" }}
+              >
+                💖
+              </span>
+              <span
+                className="animate-bounce animation-delay-300"
+                style={{ color: "#B3A8DA" }}
+              >
+                ✨
+              </span>
+              <span
+                className="animate-bounce animation-delay-450"
+                style={{ color: "#B3A8DA" }}
+              >
+                🌸
+              </span>
             </div>
           </div>
 
           {/* CSS for custom animations */}
           <style jsx>{`
             @keyframes float {
-              0%, 100% { transform: translateY(0px) rotate(0deg); }
-              50% { transform: translateY(-10px) rotate(180deg); }
+              0%,
+              100% {
+                transform: translateY(0px) rotate(0deg);
+              }
+              50% {
+                transform: translateY(-10px) rotate(180deg);
+              }
             }
-            .animation-delay-150 { animation-delay: 150ms; }
-            .animation-delay-300 { animation-delay: 300ms; }
-            .animation-delay-450 { animation-delay: 450ms; }
+            .animation-delay-150 {
+              animation-delay: 150ms;
+            }
+            .animation-delay-300 {
+              animation-delay: 300ms;
+            }
+            .animation-delay-450 {
+              animation-delay: 450ms;
+            }
           `}</style>
         </div>
       )}
@@ -657,7 +746,10 @@ export const UI = () => {
                   className="bg-blue-600 hover:bg-blue-700 transition-all duration-300 text-white px-1.5 py-1 sm:px-3 sm:py-2 rounded-full text-xs sm:text-sm focus:outline-none cursor-pointer min-w-[32px] flex items-center justify-center hover:scale-110 active:scale-95 shadow-lg flex-shrink-0"
                   title="Theo dõi Facebook"
                 >
-                  <FontAwesomeIcon icon={faFacebook} className="text-sm sm:text-lg" />
+                  <FontAwesomeIcon
+                    icon={faFacebook}
+                    className="text-sm sm:text-lg"
+                  />
                 </a>
                 <a
                   href="https://www.tiktok.com/@chandungvinu"
@@ -666,7 +758,10 @@ export const UI = () => {
                   className="bg-black hover:bg-gray-800 transition-all duration-300 text-white px-1.5 py-1 sm:px-3 sm:py-2 rounded-full text-xs sm:text-sm focus:outline-none cursor-pointer min-w-[32px] flex items-center justify-center hover:scale-110 active:scale-95 shadow-lg flex-shrink-0"
                   title="Theo dõi TikTok"
                 >
-                  <FontAwesomeIcon icon={faTiktok} className="text-sm sm:text-lg" />
+                  <FontAwesomeIcon
+                    icon={faTiktok}
+                    className="text-sm sm:text-lg"
+                  />
                 </a>
               </div>
 
@@ -693,7 +788,9 @@ export const UI = () => {
                     onClick={() => handlePageClick(0)}
                   >
                     <div className="flex items-center gap-1 sm:gap-2">
-                      <span className="text-sm sm:text-base md:text-lg">📖</span>
+                      <span className="text-sm sm:text-base md:text-lg">
+                        📖
+                      </span>
                       <span className="hidden xs:inline text-xs sm:text-sm md:text-base">
                         Bìa Trước
                       </span>
@@ -744,7 +841,9 @@ export const UI = () => {
                     onClick={() => handlePageClick(pages.length)}
                   >
                     <div className="flex items-center gap-1 sm:gap-2">
-                      <span className="text-sm sm:text-base md:text-lg">🌟</span>
+                      <span className="text-sm sm:text-base md:text-lg">
+                        🌟
+                      </span>
                       <span className="hidden xs:inline text-xs sm:text-sm md:text-base">
                         Bìa Sau
                       </span>

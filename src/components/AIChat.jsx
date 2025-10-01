@@ -8,7 +8,7 @@ const sampleQuestions = [
   "Nữ quyền có mâu thuẫn với Mác – Lênin?",
   "Triết học hiện sinh nhìn nữ quyền thế nào?",
     "Simone de Beauvoir nói gì về phụ nữ?",
-    "Triết học nữ quyền giải quyết bất công thế nào?"
+    "Triết học nữ quyền giải quyết bất công thế nào?",
 ]
 
 const AIChat = ({ isOpen, onClose }) => {

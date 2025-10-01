@@ -3,7 +3,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 class GeminiService {
   constructor() {
     // Sử dụng API key được cung cấp trực tiếp (không dùng .env)
-    const apiKey = "AIzaSyDDQpPl-bcYirclhdvvUToSu2dIeH92sdA";
+    const apiKey = "AIzaSyCDfAg5hC7JvhwOnbw_OVM_f4MuUEcGHs8";
 
     if (!apiKey) {
       throw new Error('Gemini API key is missing');

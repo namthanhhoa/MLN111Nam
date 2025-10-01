@@ -1,5 +1,5 @@
 import { atom, useAtom } from "jotai";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faTiktok } from "@fortawesome/free-brands-svg-icons";
 import { FcFeedback } from "react-icons/fc";
@@ -184,6 +184,15 @@ const PageContent = ({ pageNumber, isOpen }) => {
   const content = pageContents[pageNumber] || pageContents[0];
   const [isMobile, setIsMobile] = useState(false);
   const [currentSection, setCurrentSection] = useAtom(contentSectionAtom);
+  const [page, setPage] = useAtom(pageAtom);
+  // Mobile bottom sheet state
+  const [sheetHeight, setSheetHeight] = useState(60); // in vh
+  const minSheet = 30; // collapsed height in vh
+  const maxSheet = 90; // expanded height in vh
+  const draggingRef = useRef(false);
+  const startYRef = useRef(0);
+  const startHeightRef = useRef(60);
+  const movedRef = useRef(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -209,11 +218,164 @@ const PageContent = ({ pageNumber, isOpen }) => {
 
   // Mobile layout: content ở dưới màn hình
   if (isMobile) {
+    const clampVh = (v) => Math.max(minSheet, Math.min(maxSheet, v));
+
+    const onPointerStart = (clientY) => {
+      draggingRef.current = true;
+      movedRef.current = false;
+      startYRef.current = clientY;
+      startHeightRef.current = sheetHeight;
+      document.addEventListener("mousemove", onMouseMove);
+      document.addEventListener("mouseup", onMouseUp);
+      document.addEventListener("touchmove", onTouchMove, { passive: false });
+      document.addEventListener("touchend", onTouchEnd);
+    };
+
+    const onMouseDown = (e) => {
+      e.preventDefault();
+      onPointerStart(e.clientY);
+    };
+
+    const onTouchStart = (e) => {
+      if (e.touches && e.touches.length > 0) {
+        e.preventDefault();
+        onPointerStart(e.touches[0].clientY);
+      }
+    };
+
+    const updateByClientY = (clientY) => {
+      const dy = startYRef.current - clientY; // drag up => positive
+      const deltaVh = (dy / window.innerHeight) * 100;
+      const next = clampVh(startHeightRef.current + deltaVh);
+      if (Math.abs(deltaVh) > 0.5) movedRef.current = true;
+      setSheetHeight(next);
+    };
+
+    const onMouseMove = (e) => {
+      if (!draggingRef.current) return;
+      e.preventDefault();
+      updateByClientY(e.clientY);
+    };
+
+    const onTouchMove = (e) => {
+      if (!draggingRef.current) return;
+      // prevent page scroll while dragging
+      e.preventDefault();
+      if (e.touches && e.touches.length > 0) {
+        updateByClientY(e.touches[0].clientY);
+      }
+    };
+
+    const endDrag = () => {
+      if (!draggingRef.current) return;
+      draggingRef.current = false;
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseup", onMouseUp);
+      document.removeEventListener("touchmove", onTouchMove);
+      document.removeEventListener("touchend", onTouchEnd);
+      // Optional snap behavior
+      const mid = (minSheet + maxSheet) / 2;
+      setSheetHeight((h) => (h < mid ? minSheet : maxSheet));
+    };
+
+    const onMouseUp = () => endDrag();
+    const onTouchEnd = () => endDrag();
+
+    const onHandleClick = () => {
+      // If not dragged, toggle collapsed/expanded
+      if (!movedRef.current) {
+        const mid = (minSheet + maxSheet) / 2;
+        setSheetHeight((h) => (h < mid ? maxSheet : minSheet));
+      }
+    };
+
     return (
-      <div className="fixed bottom-0 left-0 right-0 h-[60vh] bg-gradient-to-t from-black/95 to-black/60 backdrop-blur-md z-50 flex flex-col border-t border-purple-500/30">
+      <div
+        className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-black/95 to-black/60 backdrop-blur-md flex flex-col border-t border-purple-500/30 z-[80]"
+        style={{ height: `${sheetHeight}vh` }}
+      >
         {/* Drag handle */}
-        <div className="flex justify-center py-2">
-          <div className="w-12 h-1 bg-white/30 rounded-full"></div>
+        <div className="flex justify-center py-2 select-none" style={{ touchAction: "none" }}>
+          <div
+            className={`w-12 h-1 bg-white/30 rounded-full ${draggingRef.current ? "opacity-70" : "opacity-100"}`}
+            role="button"
+            aria-label="Kéo để mở rộng/thu gọn"
+            onMouseDown={onMouseDown}
+            onTouchStart={onTouchStart}
+            onClick={onHandleClick}
+            style={{ cursor: draggingRef.current ? "grabbing" : "grab" }}
+          ></div>
+        </div>
+
+        {/* Mobile page selector inside sheet */}
+        <div className="px-2 pb-1 pointer-events-auto">
+          <div className="overflow-x-auto scrollbar-hide">
+            <div className="flex items-center gap-1 sm:gap-2 md:gap-3 p-1 justify-center min-w-max">
+              {/* Front cover button */}
+              <button
+                className={`transition-all duration-300 px-2 py-2 sm:px-3 sm:py-3 md:px-4 md:py-3 rounded-lg sm:rounded-xl text-xs sm:text-sm font-medium shrink-0 border-2 min-h-[36px] relative overflow-hidden group active:scale-95 ${
+                  0 === page
+                    ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white border-purple-400 shadow-lg"
+                    : "bg-black/30 text-white border-white/30 hover:border-purple-400 hover:bg-purple-500/20"
+                }`}
+                onClick={() => setPage(0)}
+                title="Bìa Trước"
+              >
+                <div className="flex items-center gap-1 sm:gap-2">
+                  <span className="text-sm sm:text-base">📖</span>
+                  <span className="hidden sm:inline text-xs sm:text-sm">Bìa Trước</span>
+                </div>
+                {0 === page && (
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-lg sm:rounded-xl"></div>
+                )}
+              </button>
+
+              {/* Page buttons */}
+              {[...pages].slice(1).map((_, index) => {
+                const pageNum = index + 1;
+                return (
+                  <button
+                    key={`mobile-sheet-page-${pageNum}`}
+                    className={`transition-all duration-300 px-2 py-2 sm:px-3 sm:py-3 md:px-4 md:py-3 rounded-lg sm:rounded-xl text-xs sm:text-sm font-medium shrink-0 border-2 min-h-[36px] relative overflow-hidden group active:scale-95 ${
+                      pageNum === page
+                        ? "bg-[#6256ca] text-white border-[#6256ca] shadow-lg"
+                        : "bg-black/30 text-white border-white/30 hover:border-[#6256ca] hover:bg-[#6256ca]/20"
+                    }`}
+                    onClick={() => setPage(pageNum)}
+                    title={`Chương ${pageNum}`}
+                  >
+                    <div className="flex items-center gap-1 sm:gap-2">
+                      <span className="text-sm sm:text-base">✨</span>
+                      <span className="hidden sm:inline text-xs sm:text-sm">Chương </span>
+                      <span className="text-xs sm:text-sm">{pageNum}</span>
+                    </div>
+                    {pageNum === page && (
+                      <div className="absolute inset-0 bg-[#6256ca]/20 rounded-lg sm:rounded-xl"></div>
+                    )}
+                  </button>
+                );
+              })}
+
+              {/* Back cover button */}
+              <button
+                className={`transition-all duration-300 px-2 py-2 sm:px-3 sm:py-3 md:px-4 md:py-3 rounded-lg sm:rounded-xl text-xs sm:text-sm font-medium shrink-0 border-2 min-h-[36px] relative overflow-hidden group active:scale-95 ${
+                  page === pages.length
+                    ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white border-purple-400 shadow-lg"
+                    : "bg-black/30 text-white border-white/30 hover:border-purple-400 hover:bg-purple-500/20"
+                }`}
+                onClick={() => setPage(pages.length)}
+                title="Bìa Sau"
+              >
+                <div className="flex items-center gap-1 sm:gap-2">
+                  <span className="text-sm sm:text-base">🌟</span>
+                  <span className="hidden sm:inline text-xs sm:text-sm">Bìa Sau</span>
+                </div>
+                {page === pages.length && (
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-lg sm:rounded-xl"></div>
+                )}
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Scrollable content area - improved scrolling */}
@@ -831,25 +993,24 @@ export const UI = () => {
                     <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-black rounded-lg blur opacity-20 group-hover:opacity-40 transition-opacity duration-200 -z-10"></div>
                   </a>
 
-                  {/* Feedback Button (Desktop) */}
+                  {/* Mobile Feedback Button */}
                   <a
                     href="https://docs.google.com/forms/d/e/1FAIpQLSeta8pGPb9rNXywXKh1829AcWxYb8F2uOHNYJIIcqn-048stg/viewform"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group relative bg-gradient-to-br from-green-500 via-teal-500 to-emerald-600 hover:from-green-400 hover:via-teal-400 hover:to-emerald-500 transition-all duration-300 text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-xs font-bold focus:outline-none cursor-pointer min-w-[50px] sm:min-w-[70px] flex flex-col items-center justify-center gap-0.5 hover:scale-105 active:scale-95 shadow-md hover:shadow-lg transform-gpu flex-shrink-0 border border-white/20 hover:border-white/40"
-                    title="Góp ý/Feedback"
+                    title="Giúp chúng mình 1 feedback nhé"
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-white/15 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
-                    <FcFeedback className="text-sm group-hover:animate-bounce relative z-10" />
+                    <FcFeedback className="text-sm animate-bounce group-hover:animate-pulse relative z-10" />
                     <span className="text-xs font-extrabold relative z-10 tracking-wide">
                       FEEDBACK
                     </span>
                     <div className="absolute -inset-0.5 bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg blur opacity-20 group-hover:opacity-40 transition-opacity duration-200 -z-10"></div>
                   </a>
                 </div>
-
-                {/* Static toggle button */}
-                <div className="pointer-events-auto flex-shrink-0">
+                {/* Static toggle button (desktop) */}
+                <div className="pointer-events-auto flex-shrink-0 ml-1 sm:ml-2">
                   <StaticToggleButton />
                 </div>
               </div>
@@ -870,19 +1031,20 @@ export const UI = () => {
               </div>
 
               {/* Action buttons directly under logo */}
-              <div className="pointer-events-auto bg-gradient-to-r from-purple-900/70 via-pink-900/70 to-purple-900/70 backdrop-blur-xl rounded-xl border border-purple-400/40 shadow-xl p-2 overflow-x-auto scrollbar-hide">
-                <div className="flex items-center gap-2 min-w-max">
+              <div className="pointer-events-auto bg-gradient-to-r from-purple-900/70 via-pink-900/70 to-purple-900/70 backdrop-blur-xl rounded-xl border border-purple-400/40 shadow-xl p-2 overflow-x-auto scrollbar-hide whitespace-nowrap snap-x snap-mandatory touch-pan-x">
+                <div className="flex items-center gap-1 sm:gap-2 min-w-max">
                   {/* Mobile Quiz Button */}
                   <button
                     onClick={() => setQuizOpen(true)}
-                    className="group relative bg-gradient-to-br from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 transition-all duration-300 text-white px-3 py-2 rounded-lg text-xs font-bold focus:outline-none cursor-pointer min-w-[70px] flex flex-col items-center justify-center gap-0.5 hover:scale-105 active:scale-95 shadow-md hover:shadow-lg transform-gpu flex-shrink-0 border border-white/20 hover:border-white/40"
+                    className="group relative bg-gradient-to-br from-yellow-400 via-orange-400 to-red-400 hover:from-yellow-300 hover:via-orange-300 hover:to-red-300 transition-all duration-300 text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-bold focus:outline-none cursor-pointer min-w-[56px] sm:min-w-[70px] flex flex-col items-center justify-center gap-0.5 hover:scale-105 active:scale-95 shadow-md hover:shadow-lg transform-gpu flex-shrink-0 border border-white/20 hover:border-white/40 snap-start"
                     title="Trắc nghiệm kiến thức về Vị Nữ"
+                    aria-label="Quiz"
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-white/15 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
-                    <span className="text-sm animate-bounce group-hover:animate-pulse relative z-10">
+                    <span className="text-sm sm:text-base animate-bounce group-hover:animate-pulse relative z-10">
                       🧠
                     </span>
-                    <span className="text-xs font-extrabold relative z-10 tracking-wide">
+                    <span className="hidden sm:inline text-xs font-extrabold relative z-10 tracking-wide">
                       QUIZ
                     </span>
                     <div className="absolute -inset-0.5 bg-gradient-to-r from-yellow-400 to-red-400 rounded-lg blur opacity-20 group-hover:opacity-40 transition-opacity duration-200 -z-10"></div>
@@ -891,14 +1053,15 @@ export const UI = () => {
                   {/* Mobile Podcast Button */}
                   <button
                     onClick={() => setPodcastOpen(true)}
-                    className="group relative bg-gradient-to-br from-purple-500 via-pink-500 to-purple-600 hover:from-purple-400 hover:via-pink-400 hover:to-purple-500 transition-all duration-300 text-white px-3 py-2 rounded-lg text-xs font-bold focus:outline-none cursor-pointer min-w-[70px] flex flex-col items-center justify-center gap-0.5 hover:scale-105 active:scale-95 shadow-md hover:shadow-lg transform-gpu flex-shrink-0 border border-white/20 hover:border-white/40"
+                    className="group relative bg-gradient-to-br from-purple-500 via-pink-500 to-purple-600 hover:from-purple-400 hover:via-pink-400 hover:to-purple-500 transition-all duration-300 text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-bold focus:outline-none cursor-pointer min-w-[56px] sm:min-w-[70px] flex flex-col items-center justify-center gap-0.5 hover:scale-105 active:scale-95 shadow-md hover:shadow-lg transform-gpu flex-shrink-0 border border-white/20 hover:border-white/40 snap-start"
                     title="Nghe Podcast về hành trình Vị Nữ"
+                    aria-label="Podcast"
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-white/15 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
-                    <span className="text-sm animate-pulse group-hover:animate-bounce relative z-10">
+                    <span className="text-sm sm:text-base animate-pulse group-hover:animate-bounce relative z-10">
                       🎙️
                     </span>
-                    <span className="text-xs font-extrabold relative z-10 tracking-wide">
+                    <span className="hidden sm:inline text-xs font-extrabold relative z-10 tracking-wide">
                       PODCAST
                     </span>
                     <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg blur opacity-20 group-hover:opacity-40 transition-opacity duration-200 -z-10"></div>
@@ -907,14 +1070,15 @@ export const UI = () => {
                   {/* Mobile AI Button */}
                   <button
                     onClick={() => setAiChatOpen(true)}
-                    className="group relative bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600 hover:from-cyan-300 hover:via-blue-400 hover:to-purple-500 transition-all duration-300 text-white px-3 py-2 rounded-lg text-xs font-bold focus:outline-none cursor-pointer min-w-[70px] flex flex-col items-center justify-center gap-0.5 hover:scale-105 active:scale-95 shadow-md hover:shadow-lg transform-gpu flex-shrink-0 border border-white/20 hover:border-white/40"
+                    className="group relative bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600 hover:from-cyan-300 hover:via-blue-400 hover:to-purple-500 transition-all duration-300 text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-bold focus:outline-none cursor-pointer min-w-[56px] sm:min-w-[70px] flex flex-col items-center justify-center gap-0.5 hover:scale-105 active:scale-95 shadow-md hover:shadow-lg transform-gpu flex-shrink-0 border border-white/20 hover:border-white/40 snap-start"
                     title="Trò chuyện với AI về Vị Nữ"
+                    aria-label="AI"
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-white/15 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
-                    <span className="text-sm animate-spin group-hover:animate-pulse relative z-10">
+                    <span className="text-sm sm:text-base animate-spin group-hover:animate-pulse relative z-10">
                       🤖
                     </span>
-                    <span className="text-xs font-extrabold relative z-10 tracking-wide">
+                    <span className="hidden sm:inline text-xs font-extrabold relative z-10 tracking-wide">
                       AI
                     </span>
                     <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-lg blur opacity-20 group-hover:opacity-40 transition-opacity duration-200 -z-10"></div>
@@ -925,15 +1089,16 @@ export const UI = () => {
                     href="https://www.facebook.com/profile.php?id=61581248485989"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 hover:from-blue-400 hover:via-blue-500 hover:to-blue-600 transition-all duration-300 text-white px-3 py-2 rounded-lg text-xs font-bold focus:outline-none cursor-pointer min-w-[70px] flex flex-col items-center justify-center gap-0.5 hover:scale-105 active:scale-95 shadow-md hover:shadow-lg transform-gpu flex-shrink-0 border border-white/20 hover:border-white/40"
+                    className="group relative bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 hover:from-blue-400 hover:via-blue-500 hover:to-blue-600 transition-all duration-300 text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-bold focus:outline-none cursor-pointer min-w-[56px] sm:min-w-[70px] flex flex-col items-center justify-center gap-0.5 hover:scale-105 active:scale-95 shadow-md hover:shadow-lg transform-gpu flex-shrink-0 border border-white/20 hover:border-white/40 snap-start"
                     title="Theo dõi Facebook - Cập nhật nội dung mới"
+                    aria-label="Facebook"
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-white/15 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
                     <FontAwesomeIcon
                       icon={faFacebook}
-                      className="text-sm animate-pulse group-hover:animate-bounce relative z-10"
+                      className="text-sm sm:text-base animate-pulse group-hover:animate-bounce relative z-10"
                     />
-                    <span className="text-xs font-extrabold relative z-10 tracking-wide">
+                    <span className="hidden sm:inline text-xs font-extrabold relative z-10 tracking-wide">
                       FB
                     </span>
                     <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg blur opacity-20 group-hover:opacity-40 transition-opacity duration-200 -z-10"></div>
@@ -944,15 +1109,16 @@ export const UI = () => {
                     href="https://www.tiktok.com/@chandungvinu"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative bg-gradient-to-br from-pink-500 via-red-500 to-black hover:from-pink-400 hover:via-red-400 hover:to-gray-800 transition-all duration-300 text-white px-3 py-2 rounded-lg text-xs font-bold focus:outline-none cursor-pointer min-w-[70px] flex flex-col items-center justify-center gap-0.5 hover:scale-105 active:scale-95 shadow-md hover:shadow-lg transform-gpu flex-shrink-0 border border-white/20 hover:border-white/40"
+                    className="group relative bg-gradient-to-br from-pink-500 via-red-500 to-black hover:from-pink-400 hover:via-red-400 hover:to-gray-800 transition-all duration-300 text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-bold focus:outline-none cursor-pointer min-w-[56px] sm:min-w-[70px] flex flex-col items-center justify-center gap-0.5 hover:scale-105 active:scale-95 shadow-md hover:shadow-lg transform-gpu flex-shrink-0 border border-white/20 hover:border-white/40 snap-start"
                     title="Theo dõi TikTok - Video thú vị về Vị Nữ"
+                    aria-label="TikTok"
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-white/15 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
                     <FontAwesomeIcon
                       icon={faTiktok}
-                      className="text-sm animate-bounce group-hover:animate-pulse relative z-10"
+                      className="text-sm sm:text-base animate-bounce group-hover:animate-pulse relative z-10"
                     />
-                    <span className="text-xs font-extrabold relative z-10 tracking-wide">
+                    <span className="hidden sm:inline text-xs font-extrabold relative z-10 tracking-wide">
                       TIKTOK
                     </span>
                     <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-black rounded-lg blur opacity-20 group-hover:opacity-40 transition-opacity duration-200 -z-10"></div>
@@ -963,12 +1129,13 @@ export const UI = () => {
                     href="https://docs.google.com/forms/d/e/1FAIpQLSeta8pGPb9rNXywXKh1829AcWxYb8F2uOHNYJIIcqn-048stg/viewform"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative bg-gradient-to-br from-green-500 via-teal-500 to-emerald-600 hover:from-green-400 hover:via-teal-400 hover:to-emerald-500 transition-all duration-300 text-white px-3 py-2 rounded-lg text-xs font-bold focus:outline-none cursor-pointer min-w-[70px] flex flex-col items-center justify-center gap-0.5 hover:scale-105 active:scale-95 shadow-md hover:shadow-lg transform-gpu flex-shrink-0 border border-white/20 hover:border-white/40"
+                    className="group relative bg-gradient-to-br from-green-500 via-teal-500 to-emerald-600 hover:from-green-400 hover:via-teal-400 hover:to-emerald-500 transition-all duration-300 text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[10px] sm:text-xs font-bold focus:outline-none cursor-pointer min-w-[56px] sm:min-w-[70px] flex flex-col items-center justify-center gap-0.5 hover:scale-105 active:scale-95 shadow-md hover:shadow-lg transform-gpu flex-shrink-0 border border-white/20 hover:border-white/40 snap-start"
                     title="Giúp chúng mình 1 feedback nhé"
+                    aria-label="Feedback"
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-white/15 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
-                    <FcFeedback className="text-sm group-hover:animate-bounce relative z-10" />
-                    <span className="text-xs font-extrabold relative z-10 tracking-wide">
+                    <FcFeedback className="text-sm sm:text-base group-hover:animate-bounce relative z-10" />
+                    <span className="hidden sm:inline text-xs font-extrabold relative z-10 tracking-wide">
                       FEEDBACK
                     </span>
                     <div className="absolute -inset-0.5 bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg blur opacity-20 group-hover:opacity-40 transition-opacity duration-200 -z-10"></div>
@@ -1001,7 +1168,7 @@ export const UI = () => {
                       <span className="text-sm sm:text-base md:text-lg">
                         📖
                       </span>
-                      <span className="hidden xs:inline text-xs sm:text-sm md:text-base">
+                      <span className="hidden sm:inline text-xs sm:text-sm md:text-base">
                         Bìa Trước
                       </span>
                     </div>
@@ -1054,7 +1221,7 @@ export const UI = () => {
                       <span className="text-sm sm:text-base md:text-lg">
                         🌟
                       </span>
-                      <span className="hidden xs:inline text-xs sm:text-sm md:text-base">
+                      <span className="hidden sm:inline text-xs sm:text-sm md:text-base">
                         Bìa Sau
                       </span>
                     </div>
@@ -1090,7 +1257,7 @@ export const UI = () => {
       {/* Close book button - responsive */}
       {bookOpen && !initialLoading && (
         <button
-          className="fixed top-3 right-3 sm:top-4 sm:right-4 md:top-6 md:right-6 z-50 bg-[#6256ca] text-white px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 rounded-full transition-all duration-300 text-xs sm:text-sm md:text-base min-h-[36px] sm:min-h-[44px] md:min-h-[48px] min-w-[36px] sm:min-w-[44px] md:min-w-[48px] flex items-center justify-center shadow-lg font-medium border border-white/20 active:scale-95"
+          className="fixed top-3 right-3 sm:top-4 sm:right-4 md:top-6 md:right-6 z-[120] bg-[#6256ca] text-white px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 rounded-full transition-all duration-300 text-xs sm:text-sm md:text-base min-h-[36px] sm:min-h-[44px] md:min-h-[48px] min-w-[36px] sm:min-w-[44px] md:min-w-[48px] flex items-center justify-center shadow-lg font-medium border border-white/20 active:scale-95"
           onClick={() => setBookOpen(false)}
         >
           <span className="flex items-center gap-1 sm:gap-2">

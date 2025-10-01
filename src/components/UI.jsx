@@ -2,6 +2,7 @@ import { atom, useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faTiktok } from "@fortawesome/free-brands-svg-icons";
+import { FcFeedback } from "react-icons/fc";
 import AIChat from "./AIChat.jsx";
 import Podcast from "./Podcast.jsx";
 import Quiz from "./Quiz.jsx";
@@ -829,6 +830,22 @@ export const UI = () => {
                     </span>
                     <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-black rounded-lg blur opacity-20 group-hover:opacity-40 transition-opacity duration-200 -z-10"></div>
                   </a>
+
+                  {/* Feedback Button (Desktop) */}
+                  <a
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSeta8pGPb9rNXywXKh1829AcWxYb8F2uOHNYJIIcqn-048stg/viewform"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative bg-gradient-to-br from-green-500 via-teal-500 to-emerald-600 hover:from-green-400 hover:via-teal-400 hover:to-emerald-500 transition-all duration-300 text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-xs font-bold focus:outline-none cursor-pointer min-w-[50px] sm:min-w-[70px] flex flex-col items-center justify-center gap-0.5 hover:scale-105 active:scale-95 shadow-md hover:shadow-lg transform-gpu flex-shrink-0 border border-white/20 hover:border-white/40"
+                    title="Góp ý/Feedback"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/15 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+                    <FcFeedback className="text-sm group-hover:animate-bounce relative z-10" />
+                    <span className="text-xs font-extrabold relative z-10 tracking-wide">
+                      FEEDBACK
+                    </span>
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg blur opacity-20 group-hover:opacity-40 transition-opacity duration-200 -z-10"></div>
+                  </a>
                 </div>
 
                 {/* Static toggle button */}
@@ -940,14 +957,27 @@ export const UI = () => {
                     </span>
                     <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-black rounded-lg blur opacity-20 group-hover:opacity-40 transition-opacity duration-200 -z-10"></div>
                   </a>
+
+                  {/* Mobile Feedback Button */}
+                  <a
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSeta8pGPb9rNXywXKh1829AcWxYb8F2uOHNYJIIcqn-048stg/viewform"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative bg-gradient-to-br from-green-500 via-teal-500 to-emerald-600 hover:from-green-400 hover:via-teal-400 hover:to-emerald-500 transition-all duration-300 text-white px-3 py-2 rounded-lg text-xs font-bold focus:outline-none cursor-pointer min-w-[70px] flex flex-col items-center justify-center gap-0.5 hover:scale-105 active:scale-95 shadow-md hover:shadow-lg transform-gpu flex-shrink-0 border border-white/20 hover:border-white/40"
+                    title="Giúp chúng mình 1 feedback nhé"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/15 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+                    <FcFeedback className="text-sm group-hover:animate-bounce relative z-10" />
+                    <span className="text-xs font-extrabold relative z-10 tracking-wide">
+                      FEEDBACK
+                    </span>
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg blur opacity-20 group-hover:opacity-40 transition-opacity duration-200 -z-10"></div>
+                  </a>
                 </div>
               </div>
-
-              {/* Mobile: Book control button */}
-              <div className="pointer-events-auto flex justify-center">
-                <StaticToggleButton />
-              </div>
             </div>
+
+            {/* Mobile: Book control button */}
           </div>
 
           {/* Remove the old mobile section that was in the middle */}

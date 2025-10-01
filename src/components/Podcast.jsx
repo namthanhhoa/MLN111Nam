@@ -13,7 +13,7 @@ const podcasts = [
   },
   {
     title: "Hành trình khẳng định bản thân",
-    videoId: "BgCry3hGT9U",
+    videoId: "DOR6CDIFd7Q",
     duration: "32:15", // Thời gian thực tế của video
   },
 ];

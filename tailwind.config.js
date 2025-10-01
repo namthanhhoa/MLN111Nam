@@ -2,8 +2,7 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    fontFamily: {
-      sans: ["Poppins", "sans-serif"],
+    fontFamily: { sans: ["Montserrat", "sans-serif"], sans: ["Poppins", "sans-serif"],
     },
     extend: {
       fontSize: {

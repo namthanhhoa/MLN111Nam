@@ -3,11 +3,13 @@ import { useGemini } from '../hooks/useGemini.js';
 
 const sampleQuestions = [
   "Nữ quyền là gì?",
-  "Quyền lực và giới tính?",
-  "Nữ giới bị áp bức?",
-  "Nữ quyền và tự do?",
-  "Nữ quyền hiện nay?",
-];
+  "Nữ quyền xuất phát từ triết học nào?",
+  "Nữ quyền hôm nay kế thừa triết học gì?",
+  "Nữ quyền có mâu thuẫn với Mác – Lênin?",
+  "Triết học hiện sinh nhìn nữ quyền thế nào?",
+    "Simone de Beauvoir nói gì về phụ nữ?",
+    "Triết học nữ quyền giải quyết bất công thế nào?"
+]
 
 const AIChat = ({ isOpen, onClose }) => {
   const [question, setQuestion] = useState('');

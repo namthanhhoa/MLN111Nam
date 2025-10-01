@@ -12,9 +12,9 @@ const podcasts = [
     duration: "07:11", // Thời gian thực tế của video
   },
   {
-    title: "Hành trình khẳng định bản thân",
-    videoId: "DOR6CDIFd7Q",
-    duration: "32:15", // Thời gian thực tế của video
+    title: "Podcast #3 - Phụ nữ sinh là \"Công cụ sản xuất?\"",
+    videoId: "mtluXMF93xg",
+    duration: "12:13", // Thời gian thực tế của video
   },
 ];
 
